@@ -1,0 +1,131 @@
+##  #displayAccordion($currentPage.getStructuredDataNodes("section")[0]) 
+
+#macro (displayAccordion $section) 
+#set($accordion_section = $section.getChild("accordion"))
+#set($accordion_type = $accordion_section.getChild("accordion_type").textValue)
+#set($accordion_basic = $accordion_section.getChild("accordion_simple"))
+#set($bkg_basic = $accordion_basic.getChild("accordion_bkg").textValue)
+#set($accordion_title_basic = $_EscapeTool.xml($accordion_basic.getChild("accordion_title").textValue))
+#set($accordions = $accordion_basic.getChildren("accordion"))
+#set($accordion_text = $accordion_section.getChild("accordion_text"))
+#set($bkg_text = $accordion_text.getChild("accordion_bkg").textValue)
+#set($accordion_title_text = $_EscapeTool.xml($accordion_text.getChild("accordion_title").textValue))
+#set($text_display = $accordion_text.getChild("text_display").textValue)
+#set($accordion_wysiwyg = $accordion_text.getChild("accordion_wysiwyg").textValue)
+#set($accordions_text = $accordion_text.getChildren("accordion"))
+
+#if(${accordion_type} == "basic_accordion")
+<div class="component py-5 #if(${bkg_basic}=='blue')text-white bg-blue#elseif(${bkg_basic}=='yellow')bg-yellow#elseif(${bkg_basic}=='grey')bg-lighter-gray#end ">
+    <div class="landing-page-accordion container py-5">
+    #if(!$_PropertyTool.isEmpty($accordion_title_basic))
+        <h2 class="mb-5 text-center">${accordion_title_basic}</h2>
+    #end
+<div class="accordion">
+ 
+    #foreach ($accordion in $accordions) 
+    #set($answer = "")
+    #set($question = $_EscapeTool.xml($accordion.getChild("question").textValue))
+    #set($answer = $accordion.getChild("answer").textValue)
+    #set ($uniqueID = $_StringTool.generateUUID())
+   <div class="accordion-item #if(${bkg_basic}=='blue')text-white bg-blue#elseif(${bkg_basic}=='yellow')bg-yellow#elseif(${bkg_basic}=='grey')bg-lighter-gray#end">
+    <h3 class="accordion-header" id="heading${uniqueID}">
+       <button alt="${question}" class="accordion-button shadow-none collapsed #if(${bkg_basic}=='blue')text-white bg-blue#elseif(${bkg_basic}=='yellow')bg-yellow#elseif(${bkg_basic}=='grey')bg-lighter-gray#end" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${uniqueID}" aria-expanded="false" aria-controls="collapse${uniqueID}">${question}</button>
+     </h3>
+    <div class="accordion-collapse collapse hide #if(${bkg_basic}=='blue')text-white bg-blue#elseif(${bkg_basic}=='yellow')bg-yellow#elseif(${bkg_basic}=='grey')bg-lighter-gray#end" id="collapse${uniqueID}" aria-labelledby="heading${uniqueID}"  data-bs-parent="#collapse${uniqueID}">
+       <div class="accordion-body">
+                 #if (!$_PropertyTool.isEmpty($answer))
+                    <p>${answer}</p>
+                 #end
+           </div>
+     </div>
+     </div>
+    
+    #end
+
+   </div>
+</div>
+</div>
+#else
+
+<div class="component py-5 #if(${bkg_text}=='blue')text-white bg-blue#elseif(${bkg_text}=='yellow')bg-yellow#elseif(${bkg_text}=='grey')bg-lighter-gray#end">
+<div class="container accordion-text">
+<div class="row py-5">
+
+    #if(${text_display}=="right")
+            <div class="col-md-6">
+                #if(!$_PropertyTool.isEmpty($accordion_title_text))
+                    <h2>${accordion_title_text}</h2>
+                #end
+                <div class="accordion my-3">
+                    #foreach ($accordion in $accordions_text) 
+                    #set($answer = "")
+                    #set($question = $_EscapeTool.xml($accordion.getChild("question").textValue))
+                     #set($answer = $accordion.getChild("answer").textValue)
+                    #set ($uniqueID = $_StringTool.generateUUID())
+                   <div class="accordion-item #if(${bkg_text}=='blue')text-white bg-blue#elseif(${bkg_text}=='yellow')bg-yellow#elseif(${bkg_text}=='grey')bg-lighter-gray#end">
+                    <h3 class="accordion-header" id="heading${uniqueID}">
+                       <button class="accordion-button shadow-none collapsed #if(${bkg_text}=='blue')text-white bg-blue#elseif(${bkg_text}=='yellow')bg-yellow#elseif(${bkg_text}=='grey')bg-lighter-gray#end" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${uniqueID}" aria-expanded="false" aria-controls="collapse${uniqueID}">${question}</button>
+                     </h3>
+                    <div class="accordion-collapse collapse hide #if(${bkg_basic}=='blue')text-white bg-blue#elseif(${bkg_basic}=='yellow')bg-yellow#elseif(${bkg_basic}=='grey')bg-lighter-gray#end" id="collapse${uniqueID}" aria-labelledby="heading${uniqueID}" data-bs-parent="#collapse${uniqueID}">
+                       <div class="accordion-body">
+                            #if (!$_PropertyTool.isEmpty($answer))
+                                 <p>${answer}</p>
+                             #end
+                           </div>
+                     </div>
+                     </div>
+                    
+                   #end
+                </div>
+        </div>
+        <div class="col-md-6">
+                #if(!$_PropertyTool.isEmpty($accordion_title_text))
+                    <h2>${accordion_title_text}</h2>
+                #end
+                 #if (!$_PropertyTool.isEmpty($accordion_wysiwyg))
+                    ${accordion_wysiwyg}
+                 #end
+        </div>
+    #else 
+    <div class="col-md-6">
+                #if(!$_PropertyTool.isEmpty($accordion_title_text))
+                    <h2>${accordion_title_text}</h2>
+                #end
+                 #if (!$_PropertyTool.isEmpty($accordion_wysiwyg))
+                    ${accordion_wysiwyg}
+                 #end
+                 
+        </div>
+        <div class="col-md-6">
+                <div class="accordion my-3">
+                  #foreach ($accordion in $accordions_text) 
+                  #set($answer = "")
+                    #set($question = $_EscapeTool.xml($accordion.getChild("question").textValue))
+                     #set($answer = $accordion.getChild("answer").textValue)
+                     
+                    #set ($uniqueID = $_StringTool.generateUUID())
+                   <div class="accordion-item #if(${bkg_text}=='blue')text-white bg-blue#elseif(${bkg_text}=='yellow')bg-yellow#elseif(${bkg_text}=='grey')bg-lighter-gray#end">
+                    #if (!$_PropertyTool.isEmpty($question))
+                    <h3 class="accordion-header" id="heading${uniqueID}">
+                       <button class="accordion-button shadow-none collapsed #if(${bkg_text}=='blue')text-white bg-blue#elseif(${bkg_text}=='yellow')bg-yellow#elseif(${bkg_text}=='grey')bg-lighter-gray#end" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${uniqueID}" aria-expanded="false" aria-controls="collapse${uniqueID}">${question}</button>
+                     </h3>
+                     #end
+                    <div class="accordion-collapse collapse hide" id="collapse${uniqueID}" aria-labelledby="heading${uniqueID}" data-bs-parent="#collapse${uniqueID}">
+                       <div class="accordion-body">
+                                 #if (!$_PropertyTool.isEmpty($answer))
+                                 <p>${answer}</p>
+                             #end
+                           </div>
+                     </div>
+                     </div>
+                    
+                    #end
+                </div>
+        </div>
+    #end
+</div>
+</div>
+</div>
+#end
+#end
+
