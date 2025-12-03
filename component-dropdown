@@ -1,0 +1,158 @@
+#set ($sections = $currentPage.getStructuredDataNodes("section"))
+
+
+<div class="full-width-content mt-5">
+
+#foreach($section in $sections)
+        #import( "/_internal/formats/velocity/_universal/template-formats/utilities" )
+        #displayVar($variables)
+
+    #if(${pick_component}=="h1")
+        #if(!$_PropertyTool.isEmpty($h1))
+         <div class="container mt-5"><div class="landing-paragraph-title"><h1>$_EscapeTool.xml(${h1})</h1></div></div>
+        #end
+    #elseif(${pick_component}=="eyebrow_title")
+        #if(!$_PropertyTool.isEmpty($eyebrow_title))
+         <div class="container mt-5"><h1 class="eyebrow utopia-font display-6">$_EscapeTool.xml(${eyebrow_title})</h1></div>
+        #end
+    #elseif(${pick_component}=="eyebrow_title_centered")
+        #if(!$_PropertyTool.isEmpty($eyebrow_title_centered))
+         <div class="container mt-5"><h2 class="eyebrow-centered utopia-font display-6">$_EscapeTool.xml(${eyebrow_title_centered})</h2></div>
+        #end
+    #elseif(${pick_component}=="eyebrow_title_narrow")
+        #if(!$_PropertyTool.isEmpty($eyebrow_title_narrow))
+         <div class="container mt-5 full-width-paragraph g-0"><h1 class="eyebrow utopia-font display-6">$_EscapeTool.xml(${eyebrow_title_narrow})</h1></div>
+        #end
+    #elseif(${pick_component}=="h2_eyebrow_title")
+        #if(!$_PropertyTool.isEmpty($h2_eyebrow_title))
+         <div class="container mt-5"><h2 class="eyebrow utopia-font display-5">$_EscapeTool.xml(${h2_eyebrow_title})</h2></div>
+        #end
+    #elseif(${pick_component}=="h2")
+        #if(!$_PropertyTool.isEmpty($h2))
+         <div class="container pt-3 text-center"><div class="landing-paragraph-title"><h2>$_EscapeTool.xml(${h2})</h2></div></div>
+        #end
+    #elseif(${pick_component}=="h3")
+        #if(!$_PropertyTool.isEmpty($h3))
+         <div class="container mt-5"><div class="landing-paragraph-title"><h3>$_EscapeTool.xml(${h3})</h3></div></div>
+        #end
+    #elseif(${pick_component}=="embed")
+    <div class="container py-5 embed-component">
+            <!--#protect
+            ${iframe}
+            #protect-->
+            
+    </div>
+    
+    
+    #elseif(${pick_component}=="wysiwyg")
+    #if(!$_PropertyTool.isEmpty($wysiwyg))
+            <div class="full-width-paragraph pb-5 pt-3 component">${wysiwyg}</div>
+            #end
+    #elseif(${pick_component}=="lead_text")
+            #if(!$_PropertyTool.isEmpty(${lead}))
+                <div class="container lead my-5"><div class="full-width-paragraph component">${lead}</div></div>
+            #end
+    #elseif(${pick_component}=="accordion")
+             #import( "/_internal/formats/velocity/_universal/components/accordion" )
+             #displayAccordion($section)
+    #elseif(${pick_component}=="alert")
+        <div class="alert alert-warning my-5" role="alert">
+            <div class="full-width-paragraph">${alert}</div>
+        </div>
+    #elseif(${pick_component}=="in-the-media")
+           <div class="bg-lighter-grey">
+            #import( "/_internal/formats/velocity/_universal/components/in-the-media" )
+            #displayMedia($section)
+    </div>
+    #elseif(${pick_component}=="faculty")
+    <div class="container">
+        <div class="full-width-paragraph">
+            #import( "/_internal/formats/velocity/_universal/components/faculty-list" )
+            #displayFaculty($section)
+        </div>
+    </div>
+    #elseif(${pick_component}=="directory")
+    <div class="container">
+        #import( "/_internal/formats/velocity/_universal/components/directory" )
+         #displayDirectory($section)
+         </div>
+    #elseif(${pick_component}=="media_text")
+        #import( "/_internal/formats/velocity/_universal/components/media-text" )
+         #displayMediaText($section)
+    #elseif(${pick_component}=="media_feature")
+        #import( "/_internal/formats/velocity/_universal/components/media-feature" )
+         #displayMediaFeature($section)
+    #elseif(${pick_component}=="testimonial")
+        #if(${pick_testimonial}=="basic_testimonial")
+            #import( "/_internal/formats/velocity/_universal/components/testimonial" )
+            #displayTestimonial($section)
+        #else
+            #import( "/_internal/formats/velocity/_universal/components/testimonial-bg-img" )
+            #displayTestimonialBgImg($section)
+        #end
+    #elseif(${pick_component}=="cards")
+    <div class="container pt-3 component">
+         #set($cards_title = $_EscapeTool.xml($section.getChild("cards").getChild("cards_title").textValue))
+            #set($cards_content = $section.getChild("cards").getChild("cards_content").textValue)
+                #if(!$_PropertyTool.isEmpty(${cards_title}))
+                    <div class="landing-paragraph-title text-center">
+                        <h2 class="pb-3">${cards_title}</h2>
+                    </div>
+                #end
+                #if(!$_PropertyTool.isEmpty($cards_content))
+                      <div class="full-width-paragraph text-center mb-5">${cards_content}</div>
+                #end
+                    #if(${pick_cards}=="cards_horizontal")
+                        #import( "/_internal/formats/velocity/_universal/components/cards-image-horizontal" )
+                        #displayHorCards($section)
+                    #elseif(${pick_cards}=="cards_vertical_3")
+                        #import( "/_internal/formats/velocity/_universal/components/cards-image-vertical-3" )
+                        #displayCards3($section)
+                    #elseif(${pick_cards}=="cards_vertical_4")
+                        #import( "/_internal/formats/velocity/_universal/components/cards-image-vertical-4" )
+                        #displayCards4($section)
+                    #elseif(${pick_cards}=="nav_cards")
+                        #import( "/_internal/formats/velocity/_universal/components/cards-navigation" )
+                        #displayNavCards($section)
+                    #elseif(${pick_cards}=="cards_lists")
+                        #import( "/_internal/formats/velocity/_universal/components/cards-lists" )
+                        #displayListCards($section)
+                    #end
+                      </div>
+    #elseif(${pick_component}=="infographic")
+        #import( "/_internal/formats/velocity/_universal/components/infographic" )
+        #displayInfographic($section)
+    #elseif(${pick_component}=="interstitial")
+        #import( "/_internal/formats/velocity/_universal/components/interstitial" )
+        #displayInterstitial($section)
+    #elseif(${pick_component}=="request_form")
+        #import( "/_internal/formats/velocity/_universal/components/inquiry_form" )
+        #displayRequestForm($section)
+    #elseif(${pick_component}=="table")
+        #import( "/_internal/formats/velocity/_universal/components/tables" )
+        #displayTable($section)
+    #elseif(${pick_component}=="block")
+        #if(!$_PropertyTool.isNull($block.asset))
+            $_SerializerTool.serialize($block.asset.xHTMLAsXMLElement, true)
+        #end
+    #elseif(${pick_component}=="newsroom")
+
+        #if($currentPage.link.contains("/inshhr/"))
+                #import( "/_internal/formats/velocity/_newsroom/research-news/research-news-component" )
+                #news($section)
+        #elseif($currentPage.link.contains("/labs/"))
+                #import( "/_internal/formats/velocity/_newsroom/research-news/research-news-component" )
+                #news($section)
+        #else 
+                #import( "/_internal/formats/velocity/_newsroom/news-component" )
+                #news($section)
+        #end
+    #end
+#end
+
+</div>
+
+
+
+
+
