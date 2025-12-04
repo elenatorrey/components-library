@@ -1,0 +1,84 @@
+## #displaySection($currentPage.getStructuredDataNode("section")[2]) 
+
+
+#macro (displayTable $section) 
+
+
+#set($tables = $section.getChildren("table"))
+
+#foreach ($table in $tables)
+    #set($striping = "")
+    #set($caption = "")
+    #set($heading_h = "")
+    #set($t_caption = "")
+    #set($summary = "")
+    #set($trs = "")
+    #set($include_c = "")
+    #set($include_h = "")
+    #set($table_copy = "")
+    #set($cts = "")
+    #set($cts = $table.getChild("t_header").getChildren("heading"))
+    #set($striping = $table.getChild("striping").textValue)
+    #set($caption = $table.getChild("caption_summary"))
+    #set($heading_h = $_EscapeTool.xml($caption.getChild("heading_hierarchy").textValue))
+    #set($t_caption = $_EscapeTool.xml($caption.getChild("caption").textValue))
+    #set($summary = $caption.getChild("table_summary").textValue)
+    #set($trs = $table.getChildren("t_rows"))
+    #set($include_c = $table.getChild("include_caption"))
+    #set($include_h = $table.getChild("include_heading"))
+    
+    <div class="full-width-paragraph pb-5 pt-3 component">
+    <div class="table-responsive">
+        <table class="table table-bordered #if(${striping}=='automatic')table-striped#end">
+     
+             <caption>
+                 #if(!$_PropertyTool.isEmpty($t_caption))
+                   #if(${heading_h}=="h3")
+                        <h3>${t_caption}</h3>
+                    #elseif(${heading_h}=="h2")
+                        <h2>${t_caption}</h2>
+                    #end
+                #end
+                #if(!$_PropertyTool.isEmpty($summary))
+                    <p>${summary}</p>
+                #end
+             </caption>
+
+    #if($_EscapeTool.xml($include_h.textValue) == "yes")
+      <tr class="bg-blue">
+        #foreach ($ct in $cts)
+            #set($title = "")
+            #set($colspan = "")
+            #set($title = $ct.getChild("column_title").textValue)
+            #set($colspan = $ct.getChild("colspan").textValue)
+            
+            <th class="table-bordered px-3 py-3 text-white text-center bg-blue" #if(!$_PropertyTool.isEmpty($colspan))colspan="${_EscapeTool.xml($colspan)}"#end>$_EscapeTool.xml($title)</th>
+        #end
+      </tr>
+      #end
+        #foreach($tr in $trs)
+            #set($stripe_bg = $tr.getChild("stripe_bg").textValue)
+          <tr #if(${stripe_bg}=='gray_bg'&&${striping}=='manual')class='bg-lighter-grey'#end>
+             #set($tds = $tr.getChildren("column"))
+
+              #foreach ($td in $tds)
+              #set($cell_colspan="")
+              #set($rowspan = "")
+              #set($t_row_cell="")
+              #set($t_row_cell = $td.getChild("t_row_cell").textValue)
+              #set($cell_colspan = $td.getChild("cell_colspan").textValue)
+              #set($rowspan = $td.getChild("rowspan").textValue)
+       
+               #if(!$_PropertyTool.isEmpty($td))
+                    <td #if(${cell_colspan} != "1") colspan='${cell_colspan}'#elseif(!${rowspan} != "1")rowspan="${rowspan}"#end class="align-middle">${t_row_cell}</td>
+                #end
+            #end
+          </tr>
+      #end
+    </table>
+    </div>
+    </div>
+#end
+#end
+
+
