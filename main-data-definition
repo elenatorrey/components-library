@@ -1,0 +1,541 @@
+<system-data-structure>
+	<group collapsed="true" identifier="alt_canonical" label="Alternate Canonical Link" restrict-to-groups=" SON_developer">
+		<asset field-id="e1212630ac1904766d2c1821f42ac6da" help-text="Choose alternate canonical page" identifier="alt_link" restrict-to-groups=" SON_developer" type="page,file,symlink"/>
+	</group>
+	<group collapsed="true" identifier="section" label="Component" multiple="true">
+		<text field-id="22ce7b94ac19047648a6458eebf9812d" identifier="pick_component" label="Type of Content" type="dropdown">
+			<dropdown-item label="None" value="none"/>
+			<dropdown-item label="H1 Eyebrow Title Wide" show-fields="section/eyebrow_title" value="eyebrow_title"/>
+			<dropdown-item label="H1 Eyebrow Title" show-fields="section/eyebrow_title_narrow" value="eyebrow_title_narrow"/>
+			<dropdown-item label="H2 Eyebrow Title" show-fields="section/h2_eyebrow_title" value="h2_eyebrow_title"/>
+			<dropdown-item label="H2 Eyebrow Title Centered" show-fields="section/eyebrow_title_centered" value="eyebrow_title_centered"/>
+			<dropdown-item label="Basic Text" show-fields="section/wysiwyg" value="wysiwyg"/>
+			<dropdown-item label="Lead Text" show-fields="section/lead_text" value="lead_text"/>
+			<dropdown-item label="Embed Code" show-fields="section/iframe" value="embed"/>
+			<dropdown-item label="Alert Message" show-fields="section/alert" value="alert"/>
+			<dropdown-item label="Faculty Feature" show-fields="section/faculty" value="faculty"/>
+			<dropdown-item label="Accordion" show-fields="section/accordion" value="accordion"/>
+			<dropdown-item label="Testimonial" show-fields="section/testimonial" value="testimonial"/>
+			<dropdown-item label="Cards" show-fields="section/cards" value="cards"/>
+			<dropdown-item label="Directory" show-fields="section/directory" value="directory"/>
+			<dropdown-item label="Media &amp; Text " show-fields="section/media_text" value="media_text"/>
+			<dropdown-item label="Media Feature" show-fields="section/media_feature" value="media_feature"/>
+			<dropdown-item label="Infographic" show-fields="section/infographic" value="infographic"/>
+			<dropdown-item label="Inquiry Form" show-fields="section/form_embed" value="request_form"/>
+			<dropdown-item label="Interstitial" show-fields="section/interstitial" value="interstitial"/>
+			<dropdown-item label="Block" show-fields="section/block" value="block"/>
+			<dropdown-item label="H2 Title" show-fields="section/h2" value="h2"/>
+			<dropdown-item label="H3 Title" show-fields="section/h3" value="h3"/>
+			<dropdown-item label="Newsroom" show-fields="section/newsroom" value="newsroom"/>
+			<dropdown-item label="In the Media" show-fields="section/media_article" value="in-the-media"/>
+			<dropdown-item label="Table" show-fields="section/table" value="table"/>
+		</text>
+		<text field-id="3920cda4ac1904765e05e3f6d88b9261" identifier="eyebrow_title" label="H1 Eyebrow Title Wide"/>
+		<text field-id="edb6c177ac19047622da43a12ffb033d" identifier="eyebrow_title_narrow" label="H1 Eyebrow Title"/>
+		<text field-id="81679bf2ac190476181218a1932ed993" identifier="h2_eyebrow_title" label="H2 Eyebrow Title"/>
+		<text field-id="c939e3d5ac1904767efeca2a7e184ddf" identifier="eyebrow_title_centered" label="H2 Eyebrow Title Centered"/>
+		<text field-id="1415f0e9ac19047663129ca6a8a1b3de" identifier="h2" label="H2 Title"/>
+		<text field-id="1415f0eaac19047663129ca6b998a94f" identifier="h3" label="H3 Title"/>
+		<text configuration="/SON_wysiwyg_editor-contributors" field-id="ff30f40dac1904764479fa6de8973127" identifier="wysiwyg" label="Basic Text" wysiwyg="true"/>
+		<text configuration="/SON_wysiwyg_editor" field-id="b894c9d5ac19047665dd42a27499d282" help-text="Lead paragraph that stands out from regular paragraphs." identifier="lead_text" label="Lead Text" wysiwyg="true"/>
+		<text configuration="/SON_wysiwyg_editor" field-id="23d84169ac19047648a6458e427073ee" identifier="alert" label="Alert Message" wysiwyg="true"/>
+		<text field-id="23b70359ac19047648a6458e509e1f56" help-text="or any other code containing iframe" identifier="iframe" label="Embed Code" multi-line="true"/>
+		<group collapsed="true" identifier="media_article" label="Media Article" maximum-number="4" minimum-number="1" multiple="true">
+			<text field-id="0be01318ac1904761a09ac8012392c9b" identifier="article_title" label="Title"/>
+			<text field-id="0be01318ac1904761a09ac801f0daf0f" identifier="article_link" label="Link"/>
+			<text field-id="0be01318ac1904761a09ac8062a89828" identifier="article_date" label="Date"/>
+			<text field-id="0be01318ac1904761a09ac8050065352" identifier="article_source" label="Source"/>
+			<text field-id="0be01319ac1904761a09ac8012b6f5cc" identifier="article_teaser" label="Teaser" multi-line="true"/>
+		</group>
+		<group collapsed="true" identifier="accordion" label="Accordion">
+			<text field-id="d8eab01aac19047644580a1543a3c570" identifier="accordion_type" label="Select Accordion Layout" type="dropdown">
+				<dropdown-item label="Basic Accordion" show-fields="section/accordion/accordion_simple" value="basic_accordion"/>
+				<dropdown-item label="Accordion + Text" show-fields="section/accordion/accordion_text" value="accordion_text"/>
+			</text>
+			<group collapsed="true" identifier="accordion_simple" label="Basic Accordion" multiple="true">
+				<text field-id="1fb3328cac1904765e05e3f6be18f9ec" identifier="accordion_bkg" label="Background Color" type="dropdown">
+					<dropdown-item label="No Background" value="no_bg"/>
+					<dropdown-item label="Blue" value="blue"/>
+					<dropdown-item label="Yellow" value="yellow"/>
+					<dropdown-item label="Grey" value="grey"/>
+				</text>
+				<text field-id="1fb3328cac1904765e05e3f6bbe3177e" identifier="accordion_title" label="Accordion Section Title"/>
+				<group collapsed="true" identifier="accordion" label="Accordion Item" multiple="true">
+					<text field-id="ff30f40dac1904764479fa6d95e1d75c" identifier="question" label="Question"/>
+					<text configuration="/SON_wysiwyg_editor" field-id="ff30f40dac1904764479fa6d9087dd43" identifier="answer" label="Answer" wysiwyg="true"/>
+				</group>
+			</group>
+			<group collapsed="true" identifier="accordion_text" label="Accordion + Text">
+				<text default="None" field-id="1acd544fac1904765e05e3f684d2242a" identifier="accordion_bkg" label="Background Color" type="dropdown">
+					<dropdown-item label="No Background" value="no_bg"/>
+					<dropdown-item label="Blue" value="blue"/>
+					<dropdown-item label="Yellow" value="yellow"/>
+					<dropdown-item label="Grey" value="grey"/>
+				</text>
+				<text field-id="1acd544fac1904765e05e3f601b9c270" identifier="accordion_title" label="Accordion Section Title"/>
+				<text field-id="1a8adc65ac1904765e05e3f690a7d9f5" identifier="text_display" label="Display Text" type="radiobutton">
+					<radio-item label="Right" value="right"/>
+					<radio-item label="Left" value="left"/>
+				</text>
+				<text configuration="/SON_wysiwyg_editor" field-id="1a8adc65ac1904765e05e3f63b789b46" identifier="accordion_wysiwyg" label="Text" wysiwyg="true"/>
+				<group collapsed="true" identifier="accordion" label="Accordion Item" multiple="true">
+					<text field-id="1a8adc65ac1904765e05e3f6138b9593" identifier="question" label="Question"/>
+					<text configuration="/SON_wysiwyg_editor" field-id="1a8adc65ac1904765e05e3f6e89ce86e" identifier="answer" label="Answer" wysiwyg="true"/>
+				</group>
+			</group>
+		</group>
+		<group collapsed="true" identifier="cards" label="Cards">
+			<text field-id="afd03262ac1904761f6278ebb9ab50c4" help-text="appears above all the cards as a section title" identifier="cards_title" label="Component Title"/>
+			<shared-field field-id="afd03263ac1904761f6278eb68ea733c" help-text="appears above all the cards as a cards section description" identifier="cards_content" label="Component Intro Copy" path="/Content Field"/>
+			<text field-id="afd03264ac1904761f6278eb6088e64a" identifier="cards_dropdown" label="Select Cards Style" type="dropdown">
+				<dropdown-item label="Vertical Cards (Columns of 3)" show-fields="section/cards/cards_vertical_3" value="cards_vertical_3"/>
+				<dropdown-item label="Vertical Cards (Columns of 4)" show-fields="section/cards/cards_vertical_4" value="cards_vertical_4"/>
+				<dropdown-item label="Horizontal Cards" show-fields="section/cards/cards_horizontal" value="cards_horizontal"/>
+				<dropdown-item label="Navigation Cards" show-fields="section/cards/nav_cards" value="nav_cards"/>
+				<dropdown-item label="List" show-fields="section/cards/lists_group" value="cards_lists"/>
+			</text>
+			<group collapsed="true" identifier="cards_vertical_4" label="Vertical Cards (Columns of 4)" maximum-number="12" multiple="true">
+				<text field-id="d74642f8ac19047665dd42a2335deeaa" identifier="card_title" label="Element Title"/>
+				<text field-id="d74642f8ac19047665dd42a2f8a147ac" identifier="imgix" label="Imgix Link" multi-line="true"/>
+				<shared-field field-id="33bad5d6ac190476181218a19c9490f71" identifier="alt" path="/Image Alt Attribute1"/>
+				<text configuration="/SON_wysiwyg_editor" field-id="d74642f8ac19047665dd42a22beadb48" identifier="card_text" label="Card Body" wysiwyg="true"/>
+				<text field-id="90c34ffcac1904765e05e3f6037134b0" help-text="Please check only one box as cards can only have one link" identifier="button_toggle" label="Button" type="checkbox">
+					<checkbox-item label="Internal Link" show-fields="section/cards/cards_vertical_4/internal_link_group" value="internal_link"/>
+					<checkbox-item label="External Link" show-fields="section/cards/cards_vertical_4/external_link_group, section/cards/cards_vertical_4/blank, section/cards/cards_vertical_4/ext_icon" value="external_link"/>
+				</text>
+				<shared-field field-id="8c79aff9ac1904765e05e3f642ebf39b" identifier="external_link_group" path="/Shared Links/External Link"/>
+				<text field-id="33172b49ac19047663129ca6438a1967" identifier="blank" label="Open in New Window" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="33172b49ac19047663129ca62583647r4113" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<shared-field field-id="8c80a7ddac1904765e05e3f6d8a4e5d5" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+			</group>
+			<group collapsed="true" identifier="cards_vertical_3" label="Vertical Cards (Columns of 3)" maximum-number="9" multiple="true">
+				<text field-id="b8a12451ac19047665dd42a22c1a468c" identifier="card_title" label="Element Title"/>
+				<text field-id="b8a12451ac19047665dd42a2803118e7" identifier="imgix" label="Imgix Link" multi-line="true"/>
+				<shared-field field-id="33bad5d6ac190476181218a19c9490f712" identifier="alt" path="/Image Alt Attribute1"/>
+				<text configuration="/SON_wysiwyg_editor" field-id="b8a12451ac19047665dd42a24e5e12dc" identifier="card_text" label="Card Body" wysiwyg="true"/>
+				<text field-id="90c34ffcac1904765e05e3f640634a63" help-text="Please check only one box as cards can only have one link" identifier="button_toggle" label="Button" type="checkbox">
+					<checkbox-item label="Internal Link" show-fields="section/cards/cards_vertical_3/internal_link_group" value="internal_link"/>
+					<checkbox-item label="External Link" show-fields="section/cards/cards_vertical_3/external_link_group, section/cards/cards_vertical_3/blank, section/cards/cards_vertical_3/ext_icon" value="external_link"/>
+				</text>
+				<shared-field field-id="8c94d476ac1904765e05e3f65179e6a7" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+				<shared-field field-id="8c94d476ac1904765e05e3f6d0216900" identifier="external_link_group" path="/Shared Links/External Link"/>
+				<text field-id="33172b49ac19047663129ca62583647e" identifier="blank" label="Open in New Window" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="33172b49ac19047663129ca62583647r41114" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+			</group>
+			<group collapsed="true" identifier="cards_horizontal" label="Horizontal Cards" multiple="true">
+				<shared-field field-id="19f30b42ac1904764479fa6d188c0946" identifier="card_title" label="Element Title" path="/Cards/Card Title"/>
+				<text field-id="cd01816aac19047665dd42a243abbe1f" identifier="image_location" label="Image Location" type="radiobutton">
+					<radio-item label="Left Image" value="image_left"/>
+					<radio-item label="Right Image" value="image_right"/>
+				</text>
+				<shared-field field-id="19f30b42ac1904764479fa6d5f27f970" identifier="imgix" path="/Cards/imgix-link"/>
+				<shared-field field-id="33bad5d6ac190476181218a19c9490f72" identifier="alt" path="/Image Alt Attribute1"/>
+				<shared-field field-id="19f30b42ac1904764479fa6df48172c7" identifier="card_text" path="/Cards/Card Body Text"/>
+				<text field-id="90c34ffcac1904765e05e3f6d74054a3" help-text="Please check only one box as cards can only have one link" identifier="button_toggle" label="Button" type="checkbox">
+					<checkbox-item label="Internal Link" show-fields="section/cards/cards_horizontal/internal_link_group" value="internal_link"/>
+					<checkbox-item label="External Link" show-fields="section/cards/cards_horizontal/external_link_group, section/cards/cards_horizontal/ext_icon, section/cards/nav_cards/blank" value="external_link"/>
+				</text>
+				<shared-field field-id="8c94d476ac1904765e05e3f65ed661d3" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+				<shared-field field-id="8c94d476ac1904765e05e3f6db0be535" identifier="external_link_group" path="/Shared Links/External Link"/>
+				<text field-id="33172b49ac19047663129ca6bfb7f63e" identifier="blank" label="Open in New Window" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="33172b49ac19047663129ca62583647r41215" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+			</group>
+			<group collapsed="true" identifier="nav_cards" label="Navigation Cards" maximum-number="12" multiple="true">
+				<text field-id="b8a12451ac19047665dd42a22c1a468c1" identifier="card_title" label="Element Title"/>
+				<text configuration="/SON_wysiwyg_editor" field-id="b8a12451ac19047665dd42a24e5e12dc1" identifier="card_text" label="Card Body" wysiwyg="true"/>
+				<text field-id="90c34ffcac1904765e05e3f640634a631" help-text="Please check only one box as cards can only have one link" identifier="button_toggle" label="Button" type="checkbox">
+					<checkbox-item label="Internal Link" show-fields="section/cards/nav_cards/internal_link_group" value="internal_link"/>
+					<checkbox-item label="External Link" show-fields="section/cards/nav_cards/external_link_group, section/cards/nav_cards/blank" value="external_link"/>
+				</text>
+				<group identifier="internal_link_group" label="Internal Links">
+					<asset field-id="c6b12a80ac19047663129ca64e1bb6a6" identifier="internal_link" label="Choose Internal Link" type="page,file,symlink"/>
+				</group>
+				<group collapsed="true" identifier="external_link_group" label="External Link ">
+					<text field-id="c6b12a81ac19047663129ca60f27f0c9" identifier="link_url" label="Link URL"/>
+				</group>
+				<text field-id="33172b49ac19047663129ca6a00f74f0" identifier="blank" label="Open in New Window" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+			</group>
+			<group collapsed="true" identifier="lists_group" label="List Column" maximum-number="9" multiple="true">
+				<text field-id="0504b515ac1904760c2a4b36f314f66b" identifier="list_group_columns" label="How many columns?" type="dropdown">
+					<dropdown-item label="Columns of 2" value="list_group_2"/>
+					<dropdown-item label="Columns of 3" value="list_group_3"/>
+				</text>
+				<text field-id="b8a12451ac19047665dd42a22c1a468c11" help-text="appears above the card column" identifier="list_title" label="Column Title"/>
+				<group collapsed="true" identifier="card_item" label="Card Item" multiple="true">
+					<text field-id="c6e9bf90ac19047663129ca6d8ad4789" identifier="card_title" label="Element Title"/>
+					<text field-id="90c34ffcac1904765e05e3f640634a6311" help-text="Please check only one box as cards can only have one link" identifier="button_toggle" label="Button" type="checkbox">
+						<checkbox-item label="Internal Link" show-fields="section/cards/lists_group/card_item/internal_link_group" value="internal_link"/>
+						<checkbox-item label="External Link" show-fields="section/cards/lists_group/card_item/external_link_group, section/cards/lists_group/card_item/external_link_group/blank, section/cards/lists_group/card_item/external_link_group/ext_icon" value="external_link"/>
+					</text>
+					<group identifier="internal_link_group" label="Internal Links">
+						<asset field-id="c6b12a80ac19047663129ca64e1bb6a61" identifier="internal_link" label="Choose Internal Link" type="page,file,symlink"/>
+					</group>
+					<group collapsed="true" identifier="external_link_group" label="External Link ">
+						<text field-id="c6b12a81ac19047663129ca60f27f0c91" identifier="link_url" label="Link URL"/>
+						<text field-id="33172b49ac19047663129ca6f33f68d1" identifier="blank" label="Open in New Window" type="radiobutton">
+							<radio-item label="Yes" value="yes"/>
+							<radio-item label="No" value="no"/>
+						</text>
+						<text field-id="33172b49ac19047663129ca62583647r414" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+							<radio-item label="Yes" value="yes"/>
+							<radio-item label="No" value="no"/>
+						</text>
+					</group>
+				</group>
+			</group>
+		</group>
+		<group collapsed="true" identifier="faculty" label="Faculty Feature" multiple="true">
+			<text field-id="3deeaf79ac19047648a6458e7e4669bb" identifier="faculty_name" label="Name"/>
+			<shared-field field-id="3deeaf79ac19047648a6458e2c102ef1" identifier="imgix_link" path="/Cards/imgix-link"/>
+			<text field-id="3deeaf79ac19047648a6458ecf246dbe" identifier="faculty_title" label="Job Title" multiple="true"/>
+			<text configuration="/SON_wysiwyg_editor" field-id="3deeaf79ac19047648a6458e8fcc89a3" help-text="can't exceed 600 charcahters" identifier="faculty_bio" label="Bio" wysiwyg="true"/>
+			<text field-id="85837260ac19047665dd42a2bd311e50123" identifier="include_button" label="Include Button?" type="radiobutton">
+				<radio-item label="Yes" show-fields="section/faculty/button_toggle" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+			<text field-id="90c34ffcac1904765e05e3f638840c9d11" identifier="button_toggle" label="Button" type="checkbox">
+				<checkbox-item label="Internal Link" show-fields="section/faculty/internal_link_group" value="internal_link"/>
+				<checkbox-item label="External Link" show-fields="section/faculty/external_link_group, section/faculty/blank, section/faculty/ext_icon" value="external_link"/>
+			</text>
+			<shared-field field-id="8c98fb66ac1904765e05e3f63690015211" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+			<shared-field field-id="8c98fb66ac1904765e05e3f6c141e8d011" identifier="external_link_group" path="/Shared Links/External Link"/>
+			<text field-id="33172b49ac19047663129ca6f33f68d11" identifier="blank" label="Open in New Window" type="radiobutton">
+				<radio-item label="Yes" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+			<text field-id="33172b49ac19047663129ca62583647r415" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+				<radio-item label="Yes" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+			<text field-id="3deeaf79ac19047648a6458ea897f9dd" identifier="faculty_quote" label="Quote" multi-line="true"/>
+		</group>
+		<group collapsed="true" identifier="directory" label="Directory" multiple="true">
+			<text field-id="1d6c71a3ac19047663129ca6c0d1bcb1" identifier="directory_columns" label="How many columns?" type="dropdown">
+				<dropdown-item label="Columns of 3" value="directory_3"/>
+				<dropdown-item label="Columns of 4" value="directory_4"/>
+			</text>
+			<group collapsed="true" identifier="directory_item" label="Directory Element" multiple="true">
+				<text field-id="4c15d485ac19047648a6458ee0cc945e" identifier="name" label="Name"/>
+				<shared-field field-id="4c15d485ac19047648a6458e800e3d9c" identifier="imgix_link" path="/Cards/imgix-link"/>
+				<text field-id="4c15d485ac19047648a6458e9bc8ff80" identifier="title" label="Job Title" multiple="true"/>
+				<text field-id="8803adc4ac190476348ad0eb912b6307" identifier="directory_text" label="Optional Text" wysiwyg="true"/>
+				<text field-id="4c15d485ac19047648a6458ed40a662a" identifier="department" label="Department/Unit"/>
+				<text field-id="4c15d486ac19047648a6458e606a12fc" identifier="email" label="Email"/>
+				<text field-id="4c15d486ac19047648a6458e459a420d" identifier="phone" label="Work Phone"/>
+				<text field-id="60b6e3bcac190476706d7f98fb795c60" identifier="mobile" label="Mobile Phone"/>
+				<text field-id="85837260ac19047665dd42a2bd311e501231" identifier="include_button" label="Include Button?" type="radiobutton">
+					<radio-item label="Yes" show-fields="section/directory/directory_item/button_toggle" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="90c34ffcac1904765e05e3f638840c9d112" identifier="button_toggle" label="Button" type="checkbox">
+					<checkbox-item label="Internal Link" show-fields="section/directory/directory_item/internal_link_group" value="internal_link"/>
+					<checkbox-item label="External Link" show-fields="section/directory/directory_item/external_link_group, section/directory/directory_item/ext_icon, section/directory/directory_item/blank" value="external_link"/>
+				</text>
+				<shared-field field-id="8c98fb66ac1904765e05e3f636900152112" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+				<shared-field field-id="8c98fb66ac1904765e05e3f6c141e8d0112" identifier="external_link_group" path="/Shared Links/External Link"/>
+				<text field-id="33172b49ac19047663129ca6f33f68d12" identifier="blank" label="Open in New Window" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="33172b49ac19047663129ca62583647r416" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+			</group>
+		</group>
+		<group identifier="media_feature" label="Media Feature">
+			<text field-id="60e0999cac19047665dd42a25aa548ab1" identifier="bg_color" label="Background Color" type="dropdown">
+				<dropdown-item label="No Background" value="no_bg"/>
+				<dropdown-item label="Blue" value="blue"/>
+				<dropdown-item label="Yellow" value="yellow"/>
+				<dropdown-item label="Grey" value="grey"/>
+			</text>
+			<shared-field field-id="60e0999bac19047665dd42a2fbe1c26e1" help-text="h2 title" identifier="title" label="Title" path="/Title"/>
+			<shared-field field-id="60e0999dac19047665dd42a2f644283c1" identifier="content_field" label="Content" path="/Content Field"/>
+			<text field-id="6114d037ac19047665dd42a229d501f81" identifier="media_type" label="Select Media Type" type="dropdown">
+				<dropdown-item label="Iframe Code" show-fields="section/media_feature/iframe" value="iframe"/>
+				<dropdown-item label="Internal Video File" show-fields="section/media_feature/video_file, section/media_feature/video_alt" value="video_file"/>
+			</text>
+			<text field-id="64a06f57ac190476348ad0ebe913f3d9" identifier="video_file" label="Link to an Internal Video File" multi-line="true"/>
+			<text field-id="f3fc9220ac1904762aad0aba4a658afc" identifier="video_alt" label="Video Alternative Text"/>
+			<text field-id="6114d037ac19047665dd42a27b3350411" identifier="iframe" label="Iframe Code" multi-line="true"/>
+			<text field-id="90c34ffcac1904765e05e3f62c2356561" identifier="button_toggle" label="Button" type="checkbox">
+				<checkbox-item label="Internal Link" show-fields="section/media_feature/internal_link_group" value="internal_link"/>
+				<checkbox-item label="External Link" show-fields="section/media_feature/external_link_group, section/media_feature/ext_icon, section/media_feature/blank" value="external_link"/>
+			</text>
+			<shared-field field-id="8c98fb66ac1904765e05e3f6bef946901" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+			<shared-field field-id="8c98fb66ac1904765e05e3f68fa2a2fb1" identifier="external_link_group" path="/Shared Links/External Link"/>
+			<text field-id="33172b49ac19047663129ca6f33f68d13" identifier="blank" label="Open in New Window" type="radiobutton">
+				<radio-item label="Yes" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+			<text field-id="33172b49ac19047663129ca62583647r417" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+				<radio-item label="Yes" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+		</group>
+		<group collapsed="true" identifier="media_text" label="Media and Text">
+			<text field-id="6b9c086eac19047665dd42a26f108732" help-text="H2 title" identifier="h2" label="Section Title"/>
+			<text field-id="19680a16ac19047663129ca6df464c17" identifier="eyebrow" label="Add yellow underline?" type="radiobutton">
+				<radio-item label="Yes" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+			<text field-id="5fac755dac190476348ad0eb34c90234" identifier="header_text" label="Header Text" wysiwyg="true"/>
+			<text field-id="60e0999cac19047665dd42a24c12e514" identifier="layout" label="Layout" type="dropdown">
+				<dropdown-item label="Media to the Right" value="media_right"/>
+				<dropdown-item label="Media to the Left" value="media_left"/>
+			</text>
+			<text field-id="60e0999cac19047665dd42a25aa548ab" identifier="bg_color" label="Background Color" type="dropdown">
+				<dropdown-item label="No Background" value="no_bg"/>
+				<dropdown-item label="Blue" value="blue"/>
+				<dropdown-item label="Yellow" value="yellow"/>
+				<dropdown-item label="Grey" value="grey"/>
+			</text>
+			<text field-id="60e0999dac19047665dd42a25cffba54" help-text="video, explore, etc." identifier="category" label="Category"/>
+			<shared-field field-id="60e0999bac19047665dd42a2fbe1c26e" help-text="H3 title" identifier="h3" label="Title" path="/Title"/>
+			<shared-field field-id="60e0999dac19047665dd42a2f644283c" identifier="content_field" label="Content" path="/Content Field"/>
+			<text field-id="6114d037ac19047665dd42a229d501f8" identifier="media_type" label="Select Media Type" type="dropdown">
+				<dropdown-item label="Imgix Link" show-fields="section/media_text/imgix_link, section/media_text/imgix_alt" value="imgix"/>
+				<dropdown-item label="Iframe Code" show-fields="section/media_text/iframe" value="iframe"/>
+			</text>
+			<shared-field field-id="60e0999dac19047665dd42a2d4fcce46" help-text="without leading &quot;/&quot;" identifier="imgix_link" path="/Cards/imgix-link"/>
+			<shared-field field-id="33bad5d6ac190476181218a19c9490f73" identifier="alt" path="/Image Alt Attribute1"/>
+			<text field-id="5fac755dac190476348ad0eb4d6015af" identifier="show_image_text_ribbon" label="Include Image Text Ribbon" type="checkbox">
+				<checkbox-item label="Yes" show-fields="section/media_text/text_ribbon" value="yes"/>
+				<checkbox-item label="No" value="no"/>
+			</text>
+			<text field-id="5fac755dac190476348ad0eba15d312c" identifier="text_ribbon" label="Image Text Ribbon" wysiwyg="true"/>
+			<text field-id="6114d037ac19047665dd42a27b335041" identifier="iframe" label="Iframe Code" multi-line="true"/>
+			<text field-id="90c34ffcac1904765e05e3f62c235656" identifier="button_toggle" label="Button" type="checkbox">
+				<checkbox-item label="Internal Link" show-fields="section/media_text/internal_link_group" value="internal_link"/>
+				<checkbox-item label="External Link" show-fields="section/media_text/external_link_group, section/media_text/ext_icon, section/media_text/blank" value="external_link"/>
+			</text>
+			<shared-field field-id="8c98fb66ac1904765e05e3f6bef94690" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+			<shared-field field-id="8c98fb66ac1904765e05e3f68fa2a2fb" identifier="external_link_group" path="/Shared Links/External Link"/>
+			<text field-id="33172b49ac19047663129ca6f33f68d14" identifier="blank" label="Open in New Window" type="radiobutton">
+				<radio-item label="Yes" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+			<text field-id="33172b49ac19047663129ca62583647r418" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+				<radio-item label="Yes" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+		</group>
+		<group collapsed="true" identifier="testimonial" label="Testimonial">
+			<text field-id="d9d145d3ac19047644580a1527094091" identifier="testimonial_type" label="Select Testimonial Layout" type="dropdown">
+				<dropdown-item label="Basic Testimonial" show-fields="section/testimonial/basic_testimonial" value="basic_testimonial"/>
+				<dropdown-item label="Testimonial + Background Image" show-fields="section/testimonial/testimonial_bg_img" value="testimonial_bg_img"/>
+			</text>
+			<group collapsed="true" identifier="basic_testimonial" label="Basic Testimonial" multiple="true">
+				<text field-id="8583725fac19047665dd42a28d429361" identifier="name" label="Name"/>
+				<text field-id="8583725fac19047665dd42a2cfe6a071" identifier="title" label="Job Title" multiple="true"/>
+				<text field-id="8583725fac19047665dd42a279b70733" identifier="imgix" label="Imgix Link" multi-line="true"/>
+				<text configuration="/SON_wysiwyg_editor" field-id="85837260ac19047665dd42a26e94863b" identifier="quote" label="Quote" wysiwyg="true"/>
+				<text field-id="85837260ac19047665dd42a2bd311e50" identifier="include_button" label="Include Button?" type="radiobutton">
+					<radio-item label="Yes" show-fields="section/testimonial/basic_testimonial/button_toggle" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="90c34ffcac1904765e05e3f638840c9d" identifier="button_toggle" label="Button" type="checkbox">
+					<checkbox-item label="Internal Link" show-fields="section/testimonial/basic_testimonial/internal_link_group" value="internal_link"/>
+					<checkbox-item label="External Link" show-fields="section/testimonial/basic_testimonial/external_link_group, section/testimonial/basic_testimonial/ext_icon, section/testimonial/basic_testimonial/blank" value="external_link"/>
+				</text>
+				<shared-field field-id="8c98fb66ac1904765e05e3f636900152" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+				<shared-field field-id="8c98fb66ac1904765e05e3f6c141e8d0" identifier="external_link_group" path="/Shared Links/External Link"/>
+				<text field-id="33172b49ac19047663129ca6f33f68d15" identifier="blank" label="Open in New Window" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="33172b49ac19047663129ca62583647r419" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+			</group>
+			<group collapsed="true" identifier="testimonial_bg_img" label="Testimonial + Background Image">
+				<text field-id="60e0999cac19047665dd42a24c12e51412" identifier="layout" label="Layout" type="dropdown">
+					<dropdown-item label="Media to the Right" value="media_right"/>
+					<dropdown-item label="Media to the Left" value="media_left"/>
+				</text>
+				<text field-id="8583725fac19047665dd42a28d42936112" identifier="name" label="Name"/>
+				<text field-id="8583725fac19047665dd42a2cfe6a07112" identifier="title" label="Job Title" multiple="true"/>
+				<text field-id="8583725fac19047665dd42a279b7073312" identifier="imgix" label="Imgix Link" multi-line="true"/>
+				<shared-field field-id="33bad5d6ac190476181218a19c9490f74" identifier="alt" path="/Image Alt Attribute1"/>
+				<text configuration="/SON_wysiwyg_editor" field-id="85837260ac19047665dd42a26e94863b12" identifier="quote" label="Quote" wysiwyg="true"/>
+				<text field-id="85837260ac19047665dd42a2bd311e5012" identifier="include_button" label="Include Button?" type="radiobutton">
+					<radio-item label="Yes" show-fields="section/testimonial/testimonial_bg_img/button_toggle" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="90c34ffcac1904765e05e3f638840c9d12" identifier="button_toggle" label="Button" type="checkbox">
+					<checkbox-item label="Internal Link" show-fields="section/testimonial/testimonial_bg_img/internal_link_group" value="internal_link"/>
+					<checkbox-item label="External Link" show-fields="section/testimonial/testimonial_bg_img/external_link_group, section/testimonial/testimonial_bg_img/ext_icon, section/testimonial/testimonial_bg_img/blank" value="external_link"/>
+				</text>
+				<shared-field field-id="8c98fb66ac1904765e05e3f63690015212" identifier="internal_link_group" path="/Shared Links/Internal Link"/>
+				<shared-field field-id="8c98fb66ac1904765e05e3f6c141e8d012" identifier="external_link_group" path="/Shared Links/External Link"/>
+				<text field-id="33172b49ac19047663129ca6f33f68d17" identifier="blank" label="Open in New Window" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="33172b49ac19047663129ca62583647r4110" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+			</group>
+			<text field-id="85bcf17cac19047665dd42a2e9fd5f6d" identifier="testimonial_bkg" label="Select Background" type="dropdown">
+				<dropdown-item label="Grey" value="grey"/>
+				<dropdown-item label="Blue" value="blue"/>
+				<dropdown-item label="Yellow" value="yellow"/>
+			</text>
+		</group>
+		<group collapsed="true" identifier="infographic" label="Infographic">
+			<text field-id="023fc7f8ac19047637feb99a510464a3" identifier="info_component_title" label="Title"/>
+			<text field-id="3be3ed14ac19047663129ca6a110990a" identifier="title_align" label="Align Title" type="radiobutton">
+				<radio-item label="Left" value="left"/>
+				<radio-item label="Center" value="center"/>
+			</text>
+			<text field-id="023fc7f8ac19047637feb99affc624ef" identifier="info_component_copy" label="Infographic Intro Copy" wysiwyg="true"/>
+			<group collapsed="true" identifier="info_item" label="Infographic Item" maximum-number="6" multiple="true">
+				<text field-id="023fc7f8ac19047637feb99a18793b50" identifier="info_elements" label="What elements would you like to add to your infographic?" type="checkbox">
+					<checkbox-item label="Visual" show-fields="section/infographic/info_item/info_icon" value="visual"/>
+					<checkbox-item label="Number" show-fields="section/infographic/info_item/info_data" value="number"/>
+					<checkbox-item label="Title" show-fields="section/infographic/info_item/stat_title" value="title"/>
+					<checkbox-item label="Text" show-fields="section/infographic/info_item/info_text" value="text"/>
+				</text>
+				<text field-id="20bc24d9ac19047637feb99ac2399261" identifier="info_icon" label="Choose Image" type="dropdown">
+					<dropdown-item label="Graduation Cap" value="graduation-cap"/>
+					<dropdown-item label="Group of Medical Professionals" value="users-medical"/>
+					<dropdown-item label="Dollar" value="circle-dollar"/>
+					<dropdown-item label="Stethoscope" value="stethoscope"/>
+					<dropdown-item label="Desktop" value="desktop"/>
+					<dropdown-item label="Patient Bed" value="bed"/>
+					<dropdown-item label="Ruler" value="ruler-triangle"/>
+					<dropdown-item label="Graph" value="chart-line-up"/>
+					<dropdown-item label="Star" value="star"/>
+					<dropdown-item label="Handshake" value="handshake"/>
+					<dropdown-item label="Magnifying Glass" value="magnifying-glass"/>
+				</text>
+				<shared-field field-id="023fc7f8ac19047637feb99a94b5c93a" identifier="info_data" path="/infographics/Infographic Data"/>
+				<shared-field field-id="023fc7f8ac19047637feb99a07002256" identifier="stat_title" path="/infographics/Infographic Title"/>
+				<shared-field field-id="023fc7f8ac19047637feb99a19008036" identifier="info_text" path="/infographics/Infographic Text"/>
+			</group>
+		</group>
+		<group collapsed="true" identifier="form_embed" label="Inquiry Form">
+			<text field-id="225518e2ac19047637feb99ae502b02e" identifier="imgix_link" label="Imgix Link" multi-line="true"/>
+			<shared-field field-id="33bad5d6ac190476181218a19c9490f75" identifier="alt" path="/Image Alt Attribute1"/>
+			<text field-id="225518e2ac19047637feb99ae89d08d7" identifier="form_text" label="Text" wysiwyg="true"/>
+			<text field-id="225518e3ac19047637feb99a07d12020" identifier="embed_code" label="Embed Code" multi-line="true"/>
+		</group>
+		<group collapsed="true" identifier="interstitial" label="Interstitial">
+			<text field-id="225518e3ac19047637feb99a3aacd94b" identifier="layout" label="Interstitial Layout" type="dropdown">
+				<dropdown-item label="Inline" value="inline"/>
+				<dropdown-item label="Stacked" value="stacked"/>
+			</text>
+			<text field-id="26b59320ac19047637feb99a56d39d72" identifier="bg_color" label="Interstitial Background Color" type="dropdown">
+				<dropdown-item label="No Background" value="no_bg"/>
+				<dropdown-item label="Grey" value="grey"/>
+				<dropdown-item label="Yellow" value="yellow"/>
+				<dropdown-item label="Blue" value="blue"/>
+			</text>
+			<text field-id="225518e3ac19047637feb99a6d38e4be" identifier="category" label="Category"/>
+			<shared-field field-id="225518e3ac19047637feb99a2ab50c16" identifier="title" label="Title" path="/Title"/>
+			<text field-id="225518e3ac19047637feb99a9fe4b106" identifier="text" label="Text" wysiwyg="true"/>
+			<group collapsed="true" identifier="interstitial_btn" label="Interstitial Button" maximum-number="3" multiple="true">
+				<text field-id="225518e3ac19047637feb99a662dd9de" identifier="button_toggle" label="Button" type="checkbox">
+					<checkbox-item label="External" show-fields="section/interstitial/interstitial_btn/external_link_group, section/interstitial/interstitial_btn/blank, section/interstitial/interstitial_btn/ext_icon" value="external_link"/>
+					<checkbox-item label="Internal" show-fields="section/interstitial/interstitial_btn/internal_link_group" value="internal_link"/>
+				</text>
+				<shared-field field-id="225518e3ac19047637feb99ab7448820" identifier="internal_link_group" label="Internal Links" path="/Shared Links/Internal Link"/>
+				<shared-field field-id="225518e3ac19047637feb99aef35194b" identifier="external_link_group" label="External Link " path="/Shared Links/External Link"/>
+				<text field-id="33172b49ac19047663129ca6f33f68d178" identifier="blank" label="Open in New Window" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+				<text field-id="33172b49ac19047663129ca62583647r4112" identifier="ext_icon" label="Add External Icon" type="radiobutton">
+					<radio-item label="Yes" value="yes"/>
+					<radio-item label="No" value="no"/>
+				</text>
+			</group>
+		</group>
+		<asset field-id="3abec0abac190476348ad0ebf4b4a9eb" identifier="block" label="Block" render-content-depth="3" type="block"/>
+		<group collapsed="true" identifier="newsroom" label="Newsroom">
+			<text field-id="64e492faac1904765f82d5640e34aabe" identifier="newsroom_type" label="Select Newsroom Page" type="dropdown">
+				<dropdown-item label="Accelerated Programs for Non-Nurses" value="accelerated-programs-for-non-nurses"/>
+				<dropdown-item label="Aging" value="aging"/>
+				<dropdown-item label="Alumni" value="alumni"/>
+				<dropdown-item label="Cancer" value="cancer"/>
+				<dropdown-item label="Center for Lifelong Learning" value="center-for-lifelong-learning"/>
+				<dropdown-item label="Cardiology" value="cardiology"/>
+				<dropdown-item label="Clinical Services" value="clinical-services"/>
+				<dropdown-item label="Current Students" value="current-students"/>
+				<dropdown-item label="Diversity" value="diversity"/>
+				<dropdown-item label="DNP program" value="dnp-program"/>
+				<dropdown-item label="Doctoral Programs" value="doctoral-programs"/>
+				<dropdown-item label="Home" value="home"/>
+				<dropdown-item label="Master's Programs" value="masters-programs"/>
+				<dropdown-item label="Nurse Practitioner Programs" value="nurse-practitioner-programs"/>
+				<dropdown-item label="Nursing Education" value="nursing-education"/>
+				<dropdown-item label="Nursing Leadership" value="nursing-leadership"/>
+				<dropdown-item label="Parent-Child Health" value="parent-child-health"/>
+				<dropdown-item label="PhD Program" value="phd-program"/>
+				<dropdown-item label="Research" value="research"/>
+				<dropdown-item label="RN to BS Program" value="rn-to-bs-program"/>
+				<dropdown-item label="Sexual Health and HIV" value="sexual-health-hiv"/>
+				<dropdown-item label="Lab - BSGH" value="labs-bsgh"/>
+			</text>
+		</group>
+		<group collapsed="true" identifier="table" label="Table" multiple="true">
+			<text field-id="c6935160ac1904766d2c18210c3cef54" identifier="striping" label="Table Stripes" type="radiobutton">
+				<radio-item label="Manual" show-fields="section/table/t_rows/stripe_bg" value="manual"/>
+				<radio-item label="Automatic" value="automatic"/>
+			</text>
+			<group identifier="caption_summary" label="Table Caption and Summary">
+				<text field-id="b769ebebac1904766d2c1821aca79110" help-text="Use H2 for main section titles. Use H3 for subsections under H2 headings." identifier="heading_hierarchy" label="Choose a heading level:" type="radiobutton">
+					<radio-item label="Heading 2 (H2)" value="h2"/>
+					<radio-item label="Heading 3 (H3)" value="h3"/>
+				</text>
+				<text field-id="a1dd331eac1904766d2c18216cd12b81" help-text="The title of the table" identifier="caption" label="Table Caption"/>
+				<text field-id="a1dd331fac1904766d2c18218d4dc0a4" identifier="table_summary" label="Table Summary" wysiwyg="true"/>
+			</group>
+			<text field-id="a1dd331fac1904766d2c1821a62b961d" identifier="include_heading" label="Include Header" type="radiobutton">
+				<radio-item label="Yes" show-fields="section/table/t_header" value="yes"/>
+				<radio-item label="No" value="no"/>
+			</text>
+			<group collapsed="true" identifier="t_header" label="Table Header">
+				<group collapsed="true" identifier="heading" label="Table Header" multiple="true">
+					<text field-id="a1dd3320ac1904766d2c182193e2f4a3" identifier="column_title" label="Column Title"/>
+					<text default="1" field-id="a1dd3320ac1904766d2c18218d0cbce6" help-text="Number of columns a cell should span across. Use this attribute to extend a cell across multiple columns in the table. For example, enter '3' to make a cell cover three columns. The default value is '1'." identifier="colspan" label="Merge Columns"/>
+				</group>
+			</group>
+			<group collapsed="true" identifier="t_rows" label="Table Row" multiple="true">
+				<text field-id="c6935160ac1904766d2c182136526b0a" identifier="stripe_bg" label="Stripe Background" type="dropdown">
+					<dropdown-item label="No Background" value="no_bg"/>
+					<dropdown-item label="Gray" value="gray_bg"/>
+				</text>
+				<group collapsed="true" identifier="column" label="Column" multiple="true">
+					<text field-id="1b38f3d6ac19047604024aec7bc378f7" identifier="t_row_cell" label="Cell" wysiwyg="true"/>
+					<text default="1" field-id="167856ebac1904761eae069d571369cf" help-text="Number of columns a cell should span across. Use this attribute to extend a cell across multiple columns in the table. For example, enter '3' to make a cell cover three columns. The default value is '1'." identifier="cell_colspan" label="Merge Columns"/>
+					<text default="1" field-id="c1579b38ac1904766d2c18210198327b" help-text="Number of rows a cell should span across.Use this attribute to extend a cell across multiple rows in the table. For example, enter '3' to make a cell cover three rows. The default value is '1'." identifier="rowspan" label="Merge Rows"/>
+				</group>
+			</group>
+		</group>
+	</group>
+</system-data-structure>
