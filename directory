@@ -1,0 +1,101 @@
+## #displayDirectory($currentPage.getStructuredDataNodes("section")[1]) 
+
+#macro(displayDirectory $section)
+
+#set($directory=$section.getChild("directory"))
+
+#set($directory_items = $directory.getChildren("directory_item"))
+#set($directory_columns = $directory.getChild("directory_columns").textValue)
+#set($department="")
+
+
+<div class="row component directory-feature py-5 #if(${directory_columns}=='directory_3')directory-side-padding#end">
+
+#foreach($d in $directory_items)
+    #set($email="")
+    #set($phone="")
+    #set($mobile="")
+    #set($imgix = "")
+    #set($department = "")
+    #set($dir_text = "")
+    #set($imgix = $_EscapeTool.xml($d.getChild("imgix_link").textValue))
+    #set($name = $_EscapeTool.xml($d.getChild("name").textValue))
+    #set($fname = $name.split(" ")[0])
+    #set($title = $d.getChildren("title"))
+    #set($dir_text = $d.getChild("directory_text").textValue)
+    #set($department = $_EscapeTool.xml($d.getChild("department").textValue))
+    #set($email = $_EscapeTool.xml($d.getChild("email").textValue))
+    #set($phone = $_EscapeTool.xml($d.getChild("phone").textValue))
+    #set($mobile = $_EscapeTool.xml($d.getChild("mobile").textValue))
+    #set($include_btn=$_EscapeTool.xml($d.getChild("include_button").textValue))
+    #set($external_url = $_EscapeTool.xml($d.getChild("external_link_group").getChild("link_url").textValue))
+    #set($internal_link_text = $_EscapeTool.xml($d.getChild("internal_link_group").getChild("link_text").textValue))
+    #set($internal_url = $d.getChild("internal_link_group").getChild("internal_link").asset.link)
+    #set($external_link_text = $_EscapeTool.xml($d.getChild("external_link_group").getChild("link_text").textValue))
+    #set ($ext_item_icon_value = $d.getChild("ext_icon").textValue)
+    #set($blank = $d.getChild("blank").textValue)
+
+    <div class="#if(${directory_columns}=='directory_3')col-sm-6 col-md-4 col-lg-4 col-xl-4#{else}col-sm-6 col-md-3 col-lg-3 col-xl-3#end mb-3">
+        <div class="card bg-light h-100 mx-auto">
+            <div class="card-img-top" style="overflow:hidden;">
+            #if(!$_PropertyTool.isEmpty($imgix))
+                <img src="https://son-images.imgix.net/${imgix}" width="100%" class="img-fluid vertical-card-img" alt="${name} Contact Information" />
+                
+            #end
+            </div>
+  <div class="card-body d-flex flex-column p-3">
+      #if(!$_PropertyTool.isEmpty($name))
+            <p class="fs-4 card-title directory-name">${name}</p>
+        #end
+        <p class="directory-title">
+            #if(!$_PropertyTool.isEmpty($title))
+            #foreach($t in $title)
+               $_EscapeTool.xml($t.textValue)<br />
+            #end
+            #end
+        </p>
+        
+        #if(!$_PropertyTool.isEmpty($dir_text))
+            <p>${dir_text}</p>
+        #end
+   
+   #if(!$_PropertyTool.isEmpty($department)||!$_PropertyTool.isEmpty($email)||!$_PropertyTool.isEmpty($phone))     
+    <p class="card-text mt-auto">
+        <ul class="list-unstyled mb-0">
+        #if(!$_PropertyTool.isEmpty($department))
+            <li class="card-link">${department}</li>
+        #end
+        #if(!$_PropertyTool.isEmpty($email))
+         <li><strong><a class="directory-email" href="mailto:${email}"><i class="fa-regular fa-envelope"></i> Email ${fname}</a></strong></li>
+        #end
+        #if(!$_PropertyTool.isEmpty($phone))
+            <li><strong><a href="tel:${phone}" class="directory-phone"><i class="fa-regular fa-phone"></i> ${phone}</a></strong></li>
+        #end
+         #if(!$_PropertyTool.isEmpty($mobile))
+            <li><strong><a href="sms:${mobile}" class="directory-phone"><i class="fa-regular fa-mobile"></i> ${mobile}</a></strong></li>
+        #end
+    </ul>
+    </p>
+    #end
+
+    
+    #if(${include_btn}=='yes')
+                 #if ($d.getChild("button_toggle").hasTextValue("internal_link"))
+                            <a href='${internal_url}' target="_parent" class="blue-link mt-auto" aria-label="${internal_link_text}">${internal_link_text}</a>
+
+                    #end
+                    #if ($d.getChild("button_toggle").hasTextValue("external_link"))
+                            <a href='${external_url}' target="#if(${blank}=='yes')_blank#{else}_parent#end" class="#if(${ext_item_icon_value}=="yes")blue-link-ext #{else}blue-link#end mt-auto" aria-label="${external_link_text}">${external_link_text}</a>
+
+                     #end
+            #end
+  </div>
+</div>
+    </div>
+
+
+#end
+
+
+</div>
+#end
