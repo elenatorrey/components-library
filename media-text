@@ -1,0 +1,188 @@
+## #displayMediaText($currentPage.getStructuredDataNodes("section")[3])  ##for testing remove when done
+
+#macro (displayMediaText $section) 
+
+#set($media_text = $section.getChild("media_text"))
+
+#set($bg_color = $media_text.getChild("bg_color").textValue)
+#set($bg_value = "#if(${bg_color}=='grey')bg-lighter-grey#elseif(${bg_color}=='blue')bg-blue text-white#elseif(${bg_color}=='yellow')bg-yellow#end")
+
+<div class="${bg_value}">
+<div class="container py-5 media-text-component component">
+    #set($h3 = "")
+    #set($header_text = "")
+    #set($h2 = "")
+    #set($eyebrow = "")
+    #set($layout = "")
+    #set($media = "")
+    #set($imgix = "")
+    #set($alt = "")
+    #set($show_ribbon = "")
+    #set($text_ribbon = "")
+    #set($iframe = "")
+    #set($category = "")
+    #set($text = "")
+    #set($button_toggle = "")
+    #set($internal_url = "")
+    #set($internal_link_text = "")
+    #set($external_url = "")
+    #set($external_link_text = "")
+    #set($category_bg = "")
+    #set($link_bg = "")
+    #set ($ext_item_icon_value = "")
+    #set ($blank = "")
+    #set($h3 = $_EscapeTool.xml($media_text.getChild("h3").textValue))
+    #set($header_text = $media_text.getChild("header_text").textValue)
+    #set($h2 = $_EscapeTool.xml($media_text.getChild("h2").textValue))
+    #set($eyebrow = $media_text.getChild("eyebrow").textValue)
+    #set($layout = $media_text.getChild("layout").textValue)
+    #set($media = $_EscapeTool.xml($media_text.getChild("media_type").textValue))
+    #set($imgix = $_EscapeTool.xml($media_text.getChild("imgix_link").textValue))
+    #set($alt = $_EscapeTool.xml($media_text.getChild("alt").textValue))
+    #set($show_ribbon = $media_text.getChild("show_image_text_ribbon"))
+    #set($text_ribbon = $media_text.getChild("text_ribbon").textValue)
+    #set($iframe = $media_text.getChild("iframe").textValue)
+    #set($category = $_EscapeTool.xml($media_text.getChild("category").textValue))
+    #set($text = $media_text.getChild("content_field").textValue)
+    #set($button_toggle = $media_text.getChild("button_toggle"))
+    #set($internal_url = $media_text.getChild("internal_link_group").getChild("internal_link").asset.link)
+    #set($internal_link_text = $_EscapeTool.xml($media_text.getChild("internal_link_group").getChild("link_text").textValue))
+    #set($external_url = $_EscapeTool.xml($media_text.getChild("external_link_group").getChild("link_url").textValue))
+    #set($external_link_text = $_EscapeTool.xml($media_text.getChild("external_link_group").getChild("link_text").textValue))
+    #set($category_bg = "#if(${bg_color}=='blue')bg-white text-black#{else}bg-black text-white#end")
+    #set($link_bg = "#if(${bg_color}=='blue')white-link#{else}black-link#end")
+    #set ($ext_item_icon_value = $media_text.getChild("ext_icon").textValue)
+    #set ($blank = $media_text.getChild("blank").textValue)
+
+
+         #if(!$_PropertyTool.isEmpty($h2))
+        <h2 class="utopia-font mb-4 display-6">${h2}</h2>
+        #end
+
+        
+        #if(!$_PropertyTool.isEmpty($header_text))
+            <div class="lead py-3">${header_text}</div>
+        #end
+        
+#if(${layout}=="media_right")
+<div class="row mt-4 flex-column-reverse flex-md-row">
+    <div class="col-md-5 col-lg-6 d-flex flex-column pe-4">
+        
+        #if(!$_PropertyTool.isEmpty($category))
+        <p><span  class="ms-1 mb-5 px-2 category-title ${category_bg}" style="#if(${bg_color}=='blue')box-shadow: -5px 0 0 #fff, 5px 0 0 #fff;#{else}box-shadow: -5px 0 0 #000, 5px 0 0 #000;#end ">${category}</span></p>
+        #end
+        
+        #if(!$_PropertyTool.isEmpty($h3))
+            #if(!$_PropertyTool.isEmpty($h2))
+                <h3 class="font-weight-bold #if(${eyebrow}=='yes')eyebrow#end">${h3}</h3>
+            #else
+                <h2 class="utopia-font font-weight-bold #if(${eyebrow}=='yes')eyebrow#end">${h3}</h2>
+            #end
+        #end
+        
+
+
+        #if(!$_PropertyTool.isEmpty($text))
+            <div class="pt-3">${text}</div>
+        #end
+        
+       
+             #if($button_toggle.hasTextValue("internal_link"))
+             <p class="#if(!${media}=='iframe') mt-auto#end pt-3">
+                #if(!$_PropertyTool.isEmpty($internal_url))
+                    <a href='$_EscapeTool.xml(${internal_url})' class="${link_bg} my-1" target="_parent" title='$_EscapeTool.xml(${h3})'>${internal_link_text}</a><br/>
+                #end
+            </p>
+            #end
+            
+            #if($button_toggle.hasTextValue("external_link"))
+            <p class="#if(!${media}=='iframe') mt-auto#end pt-3">
+                #if(!$_PropertyTool.isEmpty($external_url))
+                    <a href='$_EscapeTool.xml(${external_url})' target="#if(${blank}=='yes')_blank#{else}_parent#end" class="my-1 #if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end" title='${h3}'>${external_link_text}</a>
+                #end
+            </p>
+            #end
+    
+        
+    </div>
+    
+     <div class="col-md-7 col-lg-6 mb-2 d-flex align-items-center">
+        
+        #if(${media}=="imgix")
+        <div class="media-text-img-wrap position-relative">
+        <img src="https://son-images.imgix.net/${imgix}" alt="$_EscapeTool.xml(${alt})" class="img-fluid w-100 mb-3 media-text-img h-auto"/>
+            #if($show_ribbon.hasTextValue("yes"))
+                 <div class="media-text-img-ribbon fs-6">${text_ribbon}</div>
+            #end
+            </div>
+        #elseif(${media}=="iframe")
+         #if(!$_PropertyTool.isEmpty($iframe))
+            <!--#protect
+            <div class="ratio ratio-16x9">${iframe}</div>
+            #protect-->
+         #end
+        #end
+    </div>
+    </div>
+#else 
+<div class="row mt-4">
+     <div class="col-md-7 col-lg-6 mb-2 d-flex align-items-center">
+        #if(${media}=="imgix")
+            <div class="media-text-img-wrap position-relative">
+             <img src="https://son-images.imgix.net/${imgix}" alt="$_EscapeTool.xml(${alt})" class="img-fluid w-100 mb-3 media-text-img h-auto"/>
+                 #if($show_ribbon.hasTextValue("yes"))
+                    <div class="media-text-img-ribbon fs-6">${text_ribbon}</div>
+                #end
+        </div>
+        #elseif(${media}=="iframe")
+         #if(!$_PropertyTool.isEmpty($iframe))
+            <!--#protect
+            <div class="ratio ratio-16x9">${iframe}</div>
+            #protect-->
+         #end
+        #end
+    </div>
+    
+    <div class="col-md-5 col-lg-6 mb-2 d-flex flex-column ps-md-4">
+        
+        #if(!$_PropertyTool.isEmpty($category))
+        <p><span  class="mb-5 px-2 category-title ${category_bg}" style="#if(${bg_color}=='blue')box-shadow: -5px 0 0 #000, 5px 0 0 #fff;#{else}box-shadow: -5px 0 0 #000, 5px 0 0 #000;#end ">${category}</span></p>
+        #end
+        
+        #if(!$_PropertyTool.isEmpty($h3))
+            #if(!$_PropertyTool.isEmpty($h2))
+                <h3 class="font-weight-bold #if(${eyebrow}=='yes')eyebrow#end">${h3}</h3>
+            #else
+                <h2 class="utopia-font font-weight-bold #if(${eyebrow}=='yes')eyebrow#end">${h3}</h2>
+            #end
+        #end
+        
+        #if(!$_PropertyTool.isEmpty($text))
+            <div class="pt-3">${text}</div>
+        #end
+    
+        
+     <p class="pt-3">
+             #if($button_toggle.hasTextValue("internal_link"))
+             <span class="#if(!${media}=='iframe') mt-auto#end">
+                #if(!$_PropertyTool.isEmpty($internal_url))
+                    <a href='$_EscapeTool.xml(${internal_url})' class="${link_bg} my-1" target="_parent" title='$_EscapeTool.xml(${h3})'>${internal_link_text}</a><br/>
+                #end
+                </span>
+            #end
+            
+            #if($button_toggle.hasTextValue("external_link"))
+            <span class="#if(!${media}=='iframe') mt-auto#end">
+                #if(!$_PropertyTool.isEmpty($external_url))
+                    <a href='$_EscapeTool.xml(${external_url})' target="#if(${blank}=='yes')_blank#{else}_parent#end" class="my-1 #if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end" title='${h3}'>${external_link_text}</a>
+                #end
+            </span>
+            #end
+        </p>
+    </div>
+    </div>
+#end
+</div>
+</div>
+
+#end
