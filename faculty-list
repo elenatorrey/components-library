@@ -1,0 +1,89 @@
+##  #displayFaculty($currentPage.getStructuredDataNodes("section")[1])  ##for testing remove when done
+
+#macro (displayFaculty $section) 
+
+#set($faculty = $section.getChildren("faculty"))
+
+
+#if($faculty.size()>0)
+#foreach($f in $faculty)
+    #set($imgix="")
+    #set($name="")
+    #set($imgix = $_EscapeTool.xml($f.getChild("imgix_link").textValue))
+    #set($faculty_section_title = $_EscapeTool.xml($f.getChild("faculty_section_title").textValue))
+    #set($name = $_EscapeTool.xml($f.getChild("faculty_name").textValue))
+    #set($title = $f.getChildren("faculty_title"))
+    #set($bio = "")
+    #set($bio = $f.getChild("faculty_bio").textValue)
+    #set($f_quote = $f.getChild( "faculty_quote").textValue)
+    ## #set($bio= $bio.truncateLength[30])
+    #set($include_btn=$_EscapeTool.xml($f.getChild("include_button").textValue))
+     #set($internal_url = $f.getChild("internal_link_group").getChild("internal_link").asset.link)
+    #set($internal_link_text = $_EscapeTool.xml($f.getChild("internal_link_group").getChild("link_text").textValue))
+    #set($external_url = $_EscapeTool.xml($f.getChild("external_link_group").getChild("link_url").textValue))
+    #set($external_link_text = $_EscapeTool.xml($f.getChild("external_link_group").getChild("link_text").textValue))
+    #set ($ext_item_icon_value = $f.getChild("ext_icon").textValue)
+    #set($blank = $f.getChild("blank").textValue)
+
+<div class="row faculty-feature py-5 component">
+    <div class="col-sm-12 col-md-4 col-lg-3">
+        <img src="https://son-images.imgix.net/${imgix}" alt="${name}" class="img-fluid" width="200"/>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-9 faculty-info">
+
+## name and title
+            #if(!$_PropertyTool.isEmpty($name))
+            <p class="directory-name"><strong>${name}</strong></p>
+            #end
+
+                #if(!$_PropertyTool.isEmpty($title))
+                <div class="mb-3">
+                  <p class='faculty-title'>
+                #foreach($t in $title)
+                    $_EscapeTool.xml($t.textValue)<br />
+                #end
+                    </p>
+                 </div>
+                #end
+
+      
+      
+  
+ 
+      #if(!$_PropertyTool.isEmpty($bio)) 
+       <p>${bio}</p>
+      #end
+                        
+
+  
+  
+##   link to profile
+        #if(${include_btn}=='yes')
+                 #if ($f.getChild("button_toggle").hasTextValue("internal_link"))
+                
+                            <a href='${internal_url}' aria-label="${internal_link_text}" target="_parent" class="btn-blue" title="${internal_link_text}">${internal_link_text} </a>
+     
+                    #end
+                    #if ($f.getChild("button_toggle").hasTextValue("external_link"))
+                            <a href='${external_url}' aria-label="${external_link_text}" target="#if(${blank}=='yes')_blank#{else}_parent#end"  title="${external_link_text}" class="#if(${ext_item_icon_value}=="yes")btn-blue-ext #{else}btn-blue#end">${external_link_text} </a>
+ 
+                     #end
+            #end
+
+     </div>
+    ##   quote  
+  #if(!$_PropertyTool.isEmpty($f_quote))
+  <div class="bg-blue text-white p-3 mt-5 ms-2">
+      <blockquote class="blockquote fs-5">
+            <p>${f_quote}</p>
+            <footer class="blockquote-footer text-white float-end"><cite>${name}</cite></footer>
+      </blockquote>
+    </div>
+ #end
+
+</div>
+#end
+#end
+
+#end
+
