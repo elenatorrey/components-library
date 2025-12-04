@@ -1,0 +1,65 @@
+## #displayCards4($currentPage.getStructuredDataNodes("section")[4]) 
+
+#macro (displayCards4 $section) 
+
+#set($cards=$section.getChild("cards").getChildren("cards_vertical_4"))
+#set($card_imgix_link = "")
+ #set($card_alt = "")
+#set($card_text = "")
+#set($card_title_vert_4= "")
+
+
+<div class="px-6 row cards-section">
+#if (!$cards.isEmpty())    
+    #foreach ($card in $cards) 
+        #set($card_imgix_link = $_EscapeTool.xml($card.getChild("imgix").textValue))
+        #set($card_alt = $_EscapeTool.xml($card.getChild("alt").textValue))
+        #set($card_title_vert_4 = $_EscapeTool.xml($card.getChild("card_title").textValue))
+        #set($card_text = $card.getChild( "card_text").textValue)
+        #set($blank = $_EscapeTool.xml($card.getChild("blank").textValue))
+        #set($internal_url = $card.getChild("internal_link_group").getChild("internal_link").asset.link)
+        #set($internal_link_text = $_EscapeTool.xml($card.getChild("internal_link_group").getChild("link_text").textValue))
+        #set($external_url = $_EscapeTool.xml($card.getChild("external_link_group").getChild("link_url").textValue))
+        #set($external_link_text = $card.getChild("external_link_group").getChild("link_text").textValue)
+        
+        #set ($ext_item_icon = $card.getChild("ext_icon"))
+       #set ($ext_item_icon_value = $_EscapeTool.xml($ext_item_icon.textValue))
+
+        <div class="col-md-6 col-lg-3 col-sm-12 col-xs-12 mb-5">
+
+            <div class="card hover-blue h-100">
+                <div class="card-img-top" style="overflow:hidden;">
+                    #if(!$_PropertyTool.isEmpty($card_imgix_link))
+                    <img src="https://son-images.imgix.net/$_EscapeTool.xml(${card_imgix_link})"  alt="${card_alt}" width="100%" class="img-fluid vertical-card-img"/>
+                    #end
+                </div>
+                <div class="card-body py-4 px-5">
+                    #if (!$_PropertyTool.isEmpty($card_title_vert_4))
+                        <p class="card-title fs-4 fw-bold">${card_title_vert_4}</p>
+                    #end
+                    #if (!$_PropertyTool.isEmpty($card_text))
+                        <p>${card_text}</p>
+                    #end
+                        #if ($card.getChild("button_toggle").hasTextValue("internal_link"))
+                            #if(!$_PropertyTool.isEmpty($internal_url))
+                                 <a href='${internal_url}' class='mt-auto learn-more-btn card-link stretched-link text-nowrap' target="_parent" title='${card_title_vert_4}' aria-label="${internal_link_text} about ${card_title_vert_4}">${internal_link_text} <i class='bi bi-arrow-right-short'></i></a>
+                            #end
+                        #elseif ($card.getChild("button_toggle").hasTextValue("external_link"))
+                            #if(!$_PropertyTool.isEmpty($external_url))
+                                <a href='${external_url}' class='mt-auto learn-more-btn card-link stretched-link text-nowrap' target="#if(${blank}=='yes')_blank#{else}_parent#end" aria-label="${external_link_text} about ${card_title_vert_4}" title='${card_title_vert_4}'>${external_link_text} #if(${ext_item_icon_value}=="yes")<i class="fa-solid fa-arrow-up-right-from-square px-2"></i> #else<i class='bi bi-arrow-right-short'></i>
+                                                    #end</a>
+                            #end
+                        #end
+                 </div>
+             </div>
+
+        </div>
+
+    #end
+#end
+
+
+</div>
+
+
+#end
