@@ -1,0 +1,105 @@
+## #displayHorCards($currentPage.getStructuredDataNodes("section")[3]) 
+
+#macro (displayHorCards $section) 
+
+#set($cards=$section.getChild("cards").getChildren("cards_horizontal"))
+
+#set($card_title = "")
+ #set($card_text = "")
+  #set($blank = "")
+#set($internal_url = "")
+#set($internal_link_text = "")
+#set($external_url = "")
+#set($external_link_text = "")
+#set ($ext_item_icon = "")
+#set ($ext_item_icon_value = "")
+ 
+
+<div class="px-6 pb-5 cards-section">
+#if (!$cards.isEmpty())    
+    #foreach ($card in $cards) 
+        #set($imgix_hor = $_EscapeTool.xml($card.getChild("imgix").textValue))
+        #set($card_title = $_EscapeTool.xml($card.getChild("card_title").textValue))
+        #set($card_text = $card.getChild( "card_text").textValue)
+        #set($blank = $_EscapeTool.xml($card.getChild("blank").textValue))
+       #set($internal_url = $card.getChild("internal_link_group").getChild("internal_link").asset.link)
+        #set($internal_link_text = $_EscapeTool.xml($card.getChild("internal_link_group").getChild("link_text").textValue))
+        #set($external_url = $_EscapeTool.xml($card.getChild("external_link_group").getChild("link_url").textValue))
+        #set($external_link_text = $_EscapeTool.xml($card.getChild("external_link_group").getChild("link_text").textValue))
+        #set($img_location = $_EscapeTool.xml($card.getChild("image_location").textValue))
+        #set($alt = $_EscapeTool.xml($card.getChild("alt").textValue))
+        #set ($ext_item_icon_value = $_EscapeTool.xml($card.getChild("ext_icon").textValue))
+        
+            
+            <div class="card card-horizontal mb-3 h-100 m-auto hover-blue w-75" >
+
+                <div class="row g-0">
+                    #if(${img_location}=="image_left")
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6" style="overflow:hidden;">
+                        #if (!$_PropertyTool.isEmpty($imgix_hor))
+                            <img src="https://son-images.imgix.net/${imgix_hor}" alt="${alt}" class="horizontal-card-img img-fluid"/>
+                            #end
+                    </div>
+                    
+                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                            <div class="card-body h-100 px-5 py-4">
+                                        #if (!$_PropertyTool.isEmpty($card_title))
+                                            <h3 class="card-title">${card_title}</h3>
+                                        #end
+                                        #if (!$_PropertyTool.isEmpty($card_text))
+                                            <p>${card_text}</p>
+                                        #end
+                                        
+                                         #if ($card.getChild("button_toggle").hasTextValue("internal_link"))
+                                             #if(!$_PropertyTool.isEmpty($internal_url))
+                                                <a href='${internal_url}' class='mt-auto learn-more-btn card-link my-5 stretched-link' target="_parent" title='${card_title}' aria-label="${internal_link_text} about ${card_title}">${internal_link_text} <i class='bi bi-arrow-right-short'></i><span class="sr-only">about ${card_title}</span></a>
+                                            #end
+                                        #end
+                                         #if ($card.getChild("button_toggle").hasTextValue("external_link"))
+                                              #if(!$_PropertyTool.isEmpty($external_url))
+                                                <a href='${external_url}' class='mt-auto learn-more-btn card-link my-5 stretched-link' target="#if(${blank}=='yes')_blank#{else}_parent#end" aria-label="${external_link_text} about ${card_title}" title='${card_title}'>${external_link_text}#if(${ext_item_icon_value}=="yes")<i class="fa-solid fa-arrow-up-right-from-square px-2"></i> #else<i class='bi bi-arrow-right-short'></i>
+                                                #end<span class="sr-only">about ${card_title}</span></a>
+                                            #end
+                                        #end
+                                        
+                            </div>
+                    </div>
+                    #else
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 order-2 order-lg-1">
+                                <div class="card-body h-100 p-5">
+                                    #if (!$_PropertyTool.isEmpty($card_title))
+                                            <h3 class="card-title">${card_title}</h3>
+                                     #end
+                                     #if (!$_PropertyTool.isEmpty($card_text))
+                                            <p>${card_text}</p>
+                                        #end
+                                    
+                                          #if ($card.getChild("button_toggle").hasTextValue("internal_link"))
+                                             #if(!$_PropertyTool.isEmpty($internal_url))
+                                                <a href='${internal_url}' class='mt-auto learn-more-btn card-link my-5 stretched-link' target="_parent" title='${card_title}' aria-label="${internal_link_text} about ${card_title}">${internal_link_text} <i class='bi bi-arrow-right-short'></i><span class="sr-only">about ${card_title}</span></a>
+                                            #end
+                                        #end
+                                         #if ($card.getChild("button_toggle").hasTextValue("external_link"))
+                                              #if(!$_PropertyTool.isEmpty($external_url))
+                                                <a href='${external_url}' class='mt-auto learn-more-btn card-link my-5 stretched-link' target="#if(${blank}=='yes')_blank#{else}_parent#end" aria-label="${external_link_text} about ${card_title}" title='${card_title}'>${external_link_text}#if(${ext_item_icon_value}=="yes")<i class="fa-solid fa-arrow-up-right-from-square px-2"></i> #else<i class='bi bi-arrow-right-short'></i>
+                                                #end<span class="sr-only">about ${card_title}</span></a>
+                                            #end
+                                        #end
+                 
+                                 </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 order-1 order-lg-2" style="overflow:hidden;">
+                            #if (!$_PropertyTool.isEmpty($imgix_hor))
+                            <img src="https://son-images.imgix.net/${imgix_hor}" alt="${alt}" class="horizontal-card-img img-fluid"/>
+                            #end
+                        </div>
+                    #end
+             </div>
+        </div>
+    #end
+#end
+
+
+</div>
+
+#end
