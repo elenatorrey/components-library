@@ -1,0 +1,233 @@
+##  #displayTestimonialBgImg($currentPage.getStructuredDataNodes("section")[4])  ##for testing remove when done
+
+#macro (displayTestimonialBgImg $section) 
+
+#set($testimonial=$section.getChild("testimonial").getChildren("testimonial_bg_img"))
+#set($testimonial_bkg = $section.getChild("testimonial").getChild("testimonial_bkg").textValue)
+#set($bg_value = "#if(${testimonial_bkg}=='grey')bg-lighter-grey#elseif(${testimonial_bkg}=='blue')bg-blue text-white#elseif(${testimonial_bkg}=='yellow')bg-yellow#end")
+
+<div class="testimonial-component py-5 component">
+#if ($testimonial.size() >0) 
+#foreach($t in $testimonial)
+    #set($layout = $t.getChild("layout").textValue)
+    #set($name=$t.getChild("name").textValue)
+    #set($titles=$t.getChildren("title"))
+    #set($imgix=$_EscapeTool.xml($t.getChild("imgix").textValue))
+    #set($alt = $_EscapeTool.xml($t.getChild("alt").textValue))
+    #set($quote=$t.getChild("quote").textValue)
+    #set($include_btn=$t.getChild("include_button").textValue)
+    #set($button_toggle = $t.getChild("button_toggle"))
+    #set($internal_url = $t.getChild("internal_link_group").getChild("internal_link").asset.link)
+    #set($internal_link_text = $_EscapeTool.xml($t.getChild("internal_link_group").getChild("link_text").textValue))
+    #set($external_url = $_EscapeTool.xml($t.getChild("external_link_group").getChild("link_url").textValue))
+    #set($external_link_text = $_EscapeTool.xml($t.getChild("external_link_group").getChild("link_text").textValue))
+    #set ($ext_item_icon_value = $t.getChild("ext_icon").textValue)
+    #set($blank = $t.getChild("blank").textValue)
+    #set($link_bg = "#if(${testimonial_bkg}=='blue')btn-white#elseif(${testimonial_bkg}=='grey')btn-blue link-hover-blue#{else}black-link link-hover-black#end")
+
+ 
+#if(${layout}=="media_right")
+<div class="pb-3 pb-md-0 ps-md-7 ms-md-3 wide-testimonial wide-testimonial-right">
+        <div class="bg-size-contain py-7 bg-testimonial-img" style="background-image: url('https://son-images.imgix.net/${imgix}');">
+          <div class="d-lg-flex d-md-flex align-items-center ms-md-n7 text-md-left">
+            <div class="#if($testimonial.size()==1)${bg_value}#end card card-testimonial card-testimonial-bg-img card-body d-none d-lg-flex d-md-flex py-grid-gutter px-grid-gutter border-0 shadow-lg ">
+              <blockquote class="blockquote px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" width="50px" height="50px" viewBox="0 0 512.5 512.5" style="enable-background:new 0 0 512.5 512.5;" xml:space="preserve" role="graphics-symbol">
+	<path d="M112.5,208.25c61.856,0,112,50.145,112,112s-50.144,112-112,112s-112-50.145-112-112l-0.5-16   c0-123.712,100.288-224,224-224v64c-42.737,0-82.917,16.643-113.137,46.863c-5.817,5.818-11.126,12.008-15.915,18.51   C100.667,208.723,106.528,208.25,112.5,208.25z M400.5,208.25c61.855,0,112,50.145,112,112s-50.145,112-112,112   s-112-50.145-112-112l-0.5-16c0-123.712,100.287-224,224-224v64c-42.736,0-82.918,16.643-113.137,46.863   c-5.818,5.818-11.127,12.008-15.916,18.51C388.666,208.723,394.527,208.25,400.5,208.25z"/>
+<title>Quotation Mark</title>
+</svg>
+                #if(!$_PropertyTool.isEmpty($quote))
+                    <p class="fs-5 py-3">${quote}</p>
+                  #end
+                   
+                <footer class="blockquote-footer">                
+                <div class="text-heading fw-medium ms-1 mt-n1 py-3 border-top">
+                      <p class="testimonial-name #if(${testimonial_bkg}=='blue')text-white#end">
+                          #if(!$_PropertyTool.isEmpty($name))
+                             ${name}
+                            #end 
+                        </p>
+                        <p class="testimonial-title #if(${testimonial_bkg}=='blue')text-white#end">
+                        #foreach($title in $titles)
+                                  #if (!$_PropertyTool.isEmpty($title.textValue))
+                                  
+                                    $_EscapeTool.xml($title.textValue)<br/>
+                                     
+                                  #end
+                              #end
+                              </p>
+                </div>
+                #if(${include_btn}=='yes')
+                 #if($button_toggle.hasTextValue("internal_link"))
+                        #if (!$_PropertyTool.isEmpty($internal_url))
+                            <a href='${internal_url}' title="${name}'s Read More" class="${link_bg} mb-2">${internal_link_text} </a><br/>
+                        #end
+                    #end
+                    #if($button_toggle.hasTextValue("external_link"))
+                        #if (!$_PropertyTool.isEmpty($external_url))
+                            <a href='${external_url}' title="${name} Read More" target="#if(${blank}=='yes')_blank#{else}_parent#end" class="mb-2 #if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end">${external_link_text} </a>
+                        #end 
+                     #end
+                #end
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+        <div class="d-md-none px-3 mt-n3">
+          <div class="card card-testimonial card-body py-grid-gutter px-grid-gutter border-0 shadow mx-auto #if($testimonial.size()==1)${bg_value}#end">
+            <blockquote class="blockquote">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="50px" height="50px" viewBox="0 0 512.5 512.5" style="enable-background:new 0 0 512.5 512.5;" xml:space="preserve" role="graphics-symbol">
+	<path d="M112.5,208.25c61.856,0,112,50.145,112,112s-50.144,112-112,112s-112-50.145-112-112l-0.5-16   c0-123.712,100.288-224,224-224v64c-42.737,0-82.917,16.643-113.137,46.863c-5.817,5.818-11.126,12.008-15.915,18.51   C100.667,208.723,106.528,208.25,112.5,208.25z M400.5,208.25c61.855,0,112,50.145,112,112s-50.145,112-112,112   s-112-50.145-112-112l-0.5-16c0-123.712,100.287-224,224-224v64c-42.736,0-82.918,16.643-113.137,46.863   c-5.818,5.818-11.127,12.008-15.916,18.51C388.666,208.723,394.527,208.25,400.5,208.25z"/>
+<title>Quotation Mark</title>
+</svg>
+                #if(!$_PropertyTool.isEmpty($quote))
+                    <p class="fs-5 pb-3">${quote}</p>
+                  #end
+                
+              <footer class="blockquote-footer">
+                   <div class="text-heading fw-medium ms-1 mt-n1 py-3 border-top">
+                      <p class="directory-name #if(${testimonial_bkg}=='blue')text-white#end">
+                          #if(!$_PropertyTool.isEmpty($name))
+                             ${name}
+                            #end 
+                        </p>
+                      
+                      <p class="directory-title #if(${testimonial_bkg}=='blue')text-white#end">
+                      #foreach($title in $titles)
+                                  #if (!$_PropertyTool.isEmpty($title.textValue))
+                                  
+                                    $_EscapeTool.xml($title.textValue)<br/>
+                                    
+                                  #end
+                              #end
+                               </p>
+                      
+                      
+                      
+                </div>
+                   #if(${include_btn}=='yes')
+                 #if($button_toggle.hasTextValue("internal_link"))
+                        #if (!$_PropertyTool.isEmpty($internal_url))
+                            <a href='${internal_url}' title="${name}'s Read More" class="${link_bg} mb-2">${internal_link_text} </a><br/>
+                        #end
+                    #end
+                    #if($button_toggle.hasTextValue("external_link"))
+                        #if (!$_PropertyTool.isEmpty($external_url))
+                            <a href='${external_url}' title="${name} Read More" target="#if(${blank}=='yes')_blank#{else}_parent#end" class="mb-2 #if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end">${external_link_text} </a>
+                        #end 
+                     #end
+                #end
+              </footer>
+             
+            </blockquote>
+            
+          </div>
+        </div>
+      </div>
+#else
+<div class="pb-3 pb-md-0 pe-md-7 me-md-3 wide-testimonial wide-testimonial-left">
+        <div class="bg-size-contain py-7 bg-testimonial-img" style="background-image: url('https://son-images.imgix.net/${imgix}');">
+          <div class="d-lg-flex d-md-flex align-items-center me-md-n7 text-md-left">
+            <div class="#if($testimonial.size()==1)${bg_value}#end card card-testimonial card-testimonial-bg-img card-body d-none d-lg-flex d-md-flex py-grid-gutter px-grid-gutter border-0 shadow-lg">
+              <blockquote class="blockquote px-3">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" width="50px" height="50px" viewBox="0 0 512.5 512.5" style="enable-background:new 0 0 512.5 512.5;" xml:space="preserve" role="graphics-symbol">
+	<path d="M112.5,208.25c61.856,0,112,50.145,112,112s-50.144,112-112,112s-112-50.145-112-112l-0.5-16   c0-123.712,100.288-224,224-224v64c-42.737,0-82.917,16.643-113.137,46.863c-5.817,5.818-11.126,12.008-15.915,18.51   C100.667,208.723,106.528,208.25,112.5,208.25z M400.5,208.25c61.855,0,112,50.145,112,112s-50.145,112-112,112   s-112-50.145-112-112l-0.5-16c0-123.712,100.287-224,224-224v64c-42.736,0-82.918,16.643-113.137,46.863   c-5.818,5.818-11.127,12.008-15.916,18.51C388.666,208.723,394.527,208.25,400.5,208.25z"/>
+<title>Quotation Mark</title>
+</svg>
+                #if(!$_PropertyTool.isEmpty($quote))
+                    <p class="fs-5 pb-3">${quote}</p>
+                  #end
+                   
+                <footer class="blockquote-footer">                
+                <div class="text-heading fw-medium ms-1 mt-n1 py-3 border-top">
+                      <p class="testimonial-name #if(${testimonial_bkg}=='blue')text-white#end">
+                           #if(!$_PropertyTool.isEmpty($name))
+                             ${name}
+                            #end  
+                        </p>
+                      
+                        
+                            <p class="testimonial-title #if(${testimonial_bkg}=='blue')text-white#end">
+                              #foreach($title in $titles)
+                                  #if (!$_PropertyTool.isEmpty($title.textValue))
+                                 
+                                    $_EscapeTool.xml($title.textValue)<br/>
+                                   
+                                  #end
+                              #end
+                                </p>
+                            
+                          
+
+                </div>
+                #if(${include_btn}=='yes')
+                 #if($button_toggle.hasTextValue("internal_link"))
+                        #if (!$_PropertyTool.isEmpty($internal_url))
+                            <a href='${internal_url}' title="${name}'s Read More" class="${link_bg} mb-2">${internal_link_text} </a><br/>
+                        #end
+                    #end
+                    #if($button_toggle.hasTextValue("external_link"))
+                        #if (!$_PropertyTool.isEmpty($external_url))
+                            <a href='${external_url}' title="${name} Read More" target="#if(${blank}=='yes')_blank#{else}_parent#end" class="mb-2 #if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end">${external_link_text} </a>
+                        #end 
+                     #end
+                #end
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+        <div class="d-md-none mt-n3 px-3">
+          <div class="card card-testimonial card-body py-grid-gutter px-grid-gutter border-0 shadow mx-auto #if($testimonial.size()==1)${bg_value}#end ">
+            <blockquote class="blockquote">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" width="50px" height="50px" viewBox="0 0 512.5 512.5" style="enable-background:new 0 0 512.5 512.5;" xml:space="preserve" role="graphics-symbol">
+	<path d="M112.5,208.25c61.856,0,112,50.145,112,112s-50.144,112-112,112s-112-50.145-112-112l-0.5-16   c0-123.712,100.288-224,224-224v64c-42.737,0-82.917,16.643-113.137,46.863c-5.817,5.818-11.126,12.008-15.915,18.51   C100.667,208.723,106.528,208.25,112.5,208.25z M400.5,208.25c61.855,0,112,50.145,112,112s-50.145,112-112,112   s-112-50.145-112-112l-0.5-16c0-123.712,100.287-224,224-224v64c-42.736,0-82.918,16.643-113.137,46.863   c-5.818,5.818-11.127,12.008-15.916,18.51C388.666,208.723,394.527,208.25,400.5,208.25z"/>
+<title>Quotation Mark</title>
+</svg>
+                #if(!$_PropertyTool.isEmpty($quote))
+                    <p class="fs-5 pb-3">${quote}</p>
+                  #end
+                  
+              <footer class="blockquote-footer">
+                   <div class="text-heading fw-medium ms-1 mt-n1 py-3 border-top">
+                      <p class="directory-name #if(${testimonial_bkg}=='blue')text-white#end">
+                           #if(!$_PropertyTool.isEmpty($name))
+                             ${name}
+                            #end 
+                        </p>
+                        <p class="directory-title #if(${testimonial_bkg}=='blue')text-white#end">
+                       #foreach($title in $titles)
+                                  #if (!$_PropertyTool.isEmpty($title.textValue))
+                                    $_EscapeTool.xml($title.textValue)<br/>
+                                  #end
+                                  #end
+                                   </p>
+                </div>
+                  #if(${include_btn}=='yes')
+                 #if($button_toggle.hasTextValue("internal_link"))
+                        #if (!$_PropertyTool.isEmpty($internal_url))
+                            <a href='${internal_url}' title="${name}'s Read More" class="${link_bg} mb-2">${internal_link_text} </a><br/>
+                        #end
+                    #end
+                    #if($button_toggle.hasTextValue("external_link"))
+                        #if (!$_PropertyTool.isEmpty($external_url))
+                            <a href='${external_url}' title="${name} Read More" target="#if(${blank}=='yes')_blank#{else}_parent#end" class="mb-2 #if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end">${external_link_text} </a>
+                        #end 
+                     #end
+                #end
+              </footer>
+               
+            </blockquote>
+           
+          </div>
+        </div>
+      </div>
+#end
+
+#end
+
+#end
+</div>
+
+#end
