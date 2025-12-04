@@ -1,0 +1,113 @@
+##  #displayInterstitial($currentPage.getStructuredDataNodes("section")[3])  ##for testing remove when done
+
+#macro (displayInterstitial $section) 
+
+#set($interstitial = $section.getChild("interstitial"))
+
+#set($bg_color = $interstitial.getChild("bg_color").textValue)
+#set($bg_value = "#if(${bg_color}=='grey')bg-lighter-grey#elseif(${bg_color}=='blue')bg-blue text-white#elseif(${bg_color}=='yellow')bg-yellow#end")
+#set($title="")
+#set($category="")
+#set($text="")
+
+<div class="${bg_value}">
+<div class="py-5 container interstitial component">
+    #set($title = $_EscapeTool.xml($interstitial.getChild("title").textValue))
+    #set($layout = $interstitial.getChild("layout").textValue)
+    #set($category = $_EscapeTool.xml($interstitial.getChild("category").textValue))
+    #set($text = $interstitial.getChild("text").textValue)
+    #set($interstitial_btn = $interstitial.getChildren("interstitial_btn"))
+    #set($category_bg = "#if(${bg_color}=='blue')bg-white text-black#{else}bg-black text-white#end")
+    #set($link_bg = "#if(${bg_color}=='blue')btn-white#elseif(${ext_item_icon_value}=='yes'&&${bg_color}=='blue')btn-white-ext#{else}btn-black#end")
+
+
+
+
+        
+#if(${layout}=="stacked")
+<div class="text-center stacked-interstitial">
+     #if(!$_PropertyTool.isEmpty($category))
+        <p><span  class="mb-5 px-2 category-title ${category_bg}">${category}</span></p>
+    #end
+    #if(!$_PropertyTool.isEmpty($title))
+        <h2 class="mb-4">${title}</h2>
+    #end
+       
+    #if(!$_PropertyTool.isEmpty($text))
+        ${text}
+    #end
+        
+        #foreach($i in $interstitial_btn)
+             #set($button_toggle = $i.getChild("button_toggle"))
+            #set($internal_url = $i.getChild("internal_link_group").getChild("internal_link").asset.link)
+            #set($internal_link_text = $i.getChild("internal_link_group").getChild("link_text").textValue)
+            #set($external_url = $i.getChild("external_link_group").getChild("link_url").textValue)
+            #set($external_link_text = $i.getChild("external_link_group").getChild("link_text").textValue)
+            #set ($ext_item_icon_value = $i.getChild("ext_icon").textValue)
+            #set($blank = $i.getChild("blank").textValue)
+            
+                    #if(!$_PropertyTool.isEmpty($button_toggle))
+                 #if($button_toggle.hasTextValue("internal_link"))
+                    #if(!$_PropertyTool.isEmpty($internal_url))
+                        <p class="mt-4"><a href='$_EscapeTool.xml(${internal_url})' target="_parent" class="${link_bg} text-nowrap" title='$_EscapeTool.xml(${title})'>${internal_link_text} </a></p>
+                    #end
+                #end
+                 #if($button_toggle.hasTextValue("external_link"))
+                    #if(!$_PropertyTool.isEmpty($external_url))
+                        <p class="mt-4"><a href='$_EscapeTool.xml(${external_url})' target="#if(${blank}=='yes')_blank#{else}_parent#end" class="text-nowrap #if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end" title='$_EscapeTool.xml(${title})'>${external_link_text} </a></p>
+                    #end
+                #end
+            #end
+        #end
+    </div>
+    
+#else 
+     <div class="row inline-interstitial">
+     <div class="col-md-3 my-auto">
+         
+         #if(!$_PropertyTool.isEmpty($category))
+        <p><span  class="mb-5 px-2 category-title ${category_bg}" style="#if(${bg_color}=='blue')box-shadow: -5px 0 0 #000, 5px 0 0 #fff;#{else}box-shadow: -5px 0 0 #000, 5px 0 0 #000;#end ">${category}</span></p>
+        #end
+        
+        #if(!$_PropertyTool.isEmpty($title))
+        <h2 class="mb-2">${title}</h2>
+        #end
+    </div>
+    
+    <div class="col-md-6 my-auto">
+         #if(!$_PropertyTool.isEmpty($text))
+            <p>${text}</p>
+        #end
+    </div>
+    
+    <div class="col-md-3 text-center my-auto">
+
+        #foreach($i in $interstitial_btn)
+             #set($button_toggle = $i.getChild("button_toggle"))
+            #set($internal_url = $i.getChild("internal_link_group").getChild("internal_link").asset.link)
+            #set($internal_link_text = $i.getChild("internal_link_group").getChild("link_text").textValue)
+            #set($external_url = $i.getChild("external_link_group").getChild("link_url").textValue)
+            #set($external_link_text = $i.getChild("external_link_group").getChild("link_text").textValue)
+            #set ($ext_item_icon_value = $i.getChild("ext_icon").textValue)
+            #set($blank = $i.getChild("blank").textValue)
+            
+            #if(!$_PropertyTool.isEmpty($button_toggle))
+                 #if($button_toggle.hasTextValue("internal_link"))
+                    #if(!$_PropertyTool.isEmpty($internal_url))
+                        <p class="mt-auto"><a href='$_EscapeTool.xml(${internal_url})' target="_parent" class="${link_bg} text-nowrap" title='$_EscapeTool.xml(${title})'>${internal_link_text} </a></p>
+                    #end
+                #end
+                #if($button_toggle.hasTextValue("external_link"))
+                    #if(!$_PropertyTool.isEmpty($external_url))
+                        <p class="mt-auto"><a href='$_EscapeTool.xml(${external_url})' target="#if(${blank}=='yes')_blank#{else}_parent#end" class="text-nowrap #if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end" title='$_EscapeTool.xml(${title})'>${external_link_text} </a></p>
+                    #end
+                #end
+            #end
+        #end
+    </div>
+    </div>
+#end
+</div>
+</div>
+
+#end
