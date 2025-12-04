@@ -1,0 +1,174 @@
+#set ($pageSD = $_XPathTool.selectSingleNode($contentRoot, "/system-index-block/calling-page/system-page/system-data-structure"))
+#set ($section = $_XPathTool.selectNodes($pageSD, "section"))
+#set ($sidebar = $_XPathTool.selectNodes($pageSD, "sidebar"))
+#set ($breadcrumb = $_XPathTool.selectSingleNode($pageSD, "breadcrumb/path"))
+#set ($intro_copy = $_XPathTool.selectSingleNode($pageSD, "intro_copy"))
+#set ($secondary_copy = $_XPathTool.selectSingleNode($pageSD, "secondary_copy"))
+#set ($page_title = $_XPathTool.selectSingleNode($pageSD, "page_title"))
+#set ($include_django = $_XPathTool.selectSingleNode($pageSD, "include_django"))
+#set ($django_block = $_XPathTool.selectNodes($pageSD, "django_block"))
+
+#set ($include_django_sidebar = $_XPathTool.selectSingleNode($pageSD, "include_django_sidebar"))
+#set ($django_sidebar_block = $_XPathTool.selectSingleNode($pageSD, "django_sidebar_block"))
+#set ($django_sidebar_block_content = $_XPathTool.selectSingleNode($django_sidebar_block, "content"))
+
+#set ($include_django_breadcrumbs = $_XPathTool.selectSingleNode($pageSD, "include_django_breadcrumbs"))
+#set ($django_breadcrumbs_block = $_XPathTool.selectSingleNode($pageSD, "django_breadcrumbs_block"))
+#set ($django_breadcrumbs_block_content = $_XPathTool.selectSingleNode($django_breadcrumbs_block, "content"))
+
+
+<main>
+<div class="full-width-content secondary-template">
+         #if(!$_PropertyTool.isEmpty($_EscapeTool.xml($page_title.value)))
+         <div class="bg-lighter-gray py-5 secondary-title-container">
+             <div class="container">
+                <h1 class="secondary-page-title display-5">$_EscapeTool.xml($page_title.value)</h1>
+                </div>
+            </div>
+ 
+          #end
+
+ <div class="container">    
+<div class="row mb-5 mt-5 row-eq-height">
+    <div class="col-md-3 d-none d-lg-block d-md-block">
+        #if($_EscapeTool.xml($include_django_sidebar.value)=="yes")
+            $_SerializerTool.serialize($django_sidebar_block_content, true)
+        #else
+        #import( "/_internal/formats/velocity/_universal/sidebar" )
+        #end
+    </div>
+
+  
+    <div class="col-md-9 ps-5">
+        #if($_EscapeTool.xml($include_django_breadcrumbs.value)=="yes")
+            $_SerializerTool.serialize($django_breadcrumbs_block_content, true)
+        #else
+            #import( "/_internal/formats/velocity/_universal/site-breadcrumb" )
+        #end
+        <div class="secondary-template-main-content pt-3 component">
+            #if($intro_copy.size()>0||$intro_copy.value!="")
+             $_SerializerTool.serialize($intro_copy, true)
+            #end
+        </div>
+        #if($_EscapeTool.xml($include_django.value)=="yes")
+        #if($django_block.size()>0)
+         #foreach($d in $django_block)
+            #set ($django_block_content = $_XPathTool.selectSingleNode($d, "content"))
+            #set ($django_block_name = $_XPathTool.selectSingleNode($d, "name"))
+                <div class="pb-3">$_SerializerTool.serialize($django_block_content, true)</div>
+                #if($_EscapeTool.xml($django_block_name.value)=="academics-external-degree-plan-data")
+                #import("/_internal/formats/velocity/get-external-degree-plan-data")
+                #end
+            #end
+            
+        #end
+        #end
+        <div class="secondary-template-main-content pt-3 component">
+            #if($secondary_copy.size()>0||$secondary_copy.value!="")
+             $_SerializerTool.serialize($secondary_copy, true)
+            #end
+        </div>
+    </div>
+</div>
+</div> 
+
+
+#if($section.size()>0)
+#foreach($s in $section)
+        #import( "/_internal/formats/velocity/_universal/variables" )
+        #displayVar($variables)
+    
+    #if(${pick_component}=="imgix_section")
+         #if(!$_PropertyTool.isEmpty(${imgix_section}))
+            <img src="https://son-images.imgix.net/${imgix_section}" alt="${imgix_alt}"/>
+        #end
+    #elseif(${pick_component}=="h2")
+        #if(!$_PropertyTool.isEmpty(${h2}))
+            <div class="text-center pt-3"><div class="landing-paragraph-title"><h2>${h2}</h2></div></div>
+        #end
+     #elseif(${pick_component}=="eyebrow_title")
+        #if(!$_PropertyTool.isEmpty(${eyebrow_title}))
+         <div class="container mt-5"><div class="landing-paragraph-title"><h1 class="eyebrow utopia-font display-5">${eyebrow_title}</h1></div></div>
+        #end
+    #elseif(${pick_component}=="h2_eyebrow_title")
+        #if(!$_PropertyTool.isEmpty(${h2_eyebrow_title}))
+         <div class="container mt-5"><div class="landing-paragraph-title"><h2 class="eyebrow utopia-font display-5">${h2_eyebrow_title}</h2></div></div>
+        #end
+         #elseif(${pick_component}=="h3")
+        #if(!$_PropertyTool.isEmpty(${h3}))
+            <div class="text-center pt-3"><div class="landing-paragraph-title"><h3>${h3}</h3></div></div>
+        #end
+    #elseif(${pick_component}=="video")
+            <div class="container text-center my-4">
+                <!--#protect
+            ${iframe.value}
+            #protect--></div>
+    #elseif(${pick_component}=="wysiwyg")
+            <div class="full-width-paragraph pt-3 component">$_SerializerTool.serialize($wysiwyg, true)</div>
+    #elseif(${pick_component}=="lead_text")
+            <div class="container lead pb-5 pt-3"><div class="full-width-paragraph component">$_SerializerTool.serialize($lead, true)</div></div>
+    #elseif(${pick_component}=="accordion"&&${pick_accordion}=="accordion_text")
+             #import( "/_internal/formats/velocity/_universal/test/accordion-text" )
+             #displayAccordion($accordion_text)
+     #elseif(${pick_component}=="accordion"&&${pick_accordion}=="basic_accordion")
+             #import( "/_internal/formats/velocity/_universal/test/accordion" )
+             #displayAccordion($basic_accordion)
+    #elseif(${pick_component}=="alert")
+        <div class="alert alert-warning" role="alert">
+            <div class="full-width-paragraph">$_SerializerTool.serialize($alert, true)</div>
+        </div>
+    #elseif(${pick_component}=="faculty")
+            #import( "/_internal/formats/velocity/_universal/test/faculty-list" )
+            #displayFaculty($section)
+     #elseif(${pick_component}=="interstitial")
+        #import( "/_internal/formats/velocity/_universal/interstitial" )
+         #displayInterstitial($interstitial)
+    #elseif(${pick_component}=="directory")
+    <div class="container">
+        #import( "/_internal/formats/velocity/_universal/directory" )
+         #displayDirectory($directory)
+         </div>
+     #elseif(${pick_component}=="media_text")
+        #import( "/_internal/formats/velocity/_universal/media-text" )
+         #displayMediaText($media_text)
+     #elseif(${pick_component}=="testimonial")
+        #if(${pick_testimonial}=="basic_testimonial")
+            #import( "/_internal/formats/velocity/_universal/testimonial" )
+            #displayTestimonial($basic_testimonial)
+        #else
+            #import( "/_internal/formats/velocity/_universal/testimonial-bg-img" )
+            #displayTestimonialBgImg($testimonial_bg_img)
+        #end
+    #elseif(${pick_component}=="cards")
+    <div class="container mt-5">
+                #if(!$_PropertyTool.isEmpty(${cards_title}))
+                    <div class="landing-paragraph-title text-center">
+                        <h2>${cards_title}</h2>
+                    </div>
+                #end
+                #if(!$_PropertyTool.isEmpty($cards_content))
+                        <div class="full-width-paragraph mb-5 text-center">$_SerializerTool.serialize($cards_content, true)</div>
+                #end
+                    #if(${pick_cards}=="cards_horizontal")
+                        #import( "/_internal/formats/velocity/_universal/test/cards-image-horizontal" )
+                         #displayHorCards($cards_horizontal)
+                    #elseif(${pick_cards}=="cards_vertical_3")
+                        <div class="full-width-paragraph">
+                            #import( "/_internal/formats/velocity/_universal/test/cards-image-vertical-3" )
+                            #displayCards3($cards_vertical_3)
+                        </div>
+                    #elseif(${pick_cards}=="cards_vertical_4")
+                        #import( "/_internal/formats/velocity/_universal/test/cards-image-vertical-4" )
+                         #displayCards4($cards_vertical_4)
+                    #elseif(${pick_cards}=="nav_cards")
+                        #import( "/_internal/formats/velocity/_universal/test/cards-navigation" )
+                         #displayNavCards($nav_cards)
+                    #end
+                       </div>
+                #end
+
+   
+#end
+#end
+</div>
+</main>
