@@ -1,0 +1,62 @@
+##  #displayInfographic($currentPage.getStructuredDataNodes("section")[1])  ##for testing remove when done
+
+#macro (displayInfographic $section) 
+
+#set($infographic = $section.getChild("infographic"))
+#set($info_items = $infographic.getChildren("info_item"))
+#set($title_align = $infographic.getChild("title_align").textValue)
+#set($info_component_title = $_EscapeTool.xml($infographic.getChild("info_component_title").textValue))
+#set($info_component_copy = $infographic.getChild("info_component_copy").textValue)
+#set($column_numbers=$info_items.size())
+    <div class="container infographic-component pt-5 pb-3 #if($_PropertyTool.isEmpty($info_component_copy)&&$_PropertyTool.isEmpty($info_component_title))mt-5#end">
+        #if(!$_PropertyTool.isEmpty($info_component_title))
+            <div class="landing-paragraph-title #if($_PropertyTool.isEmpty($info_component_copy))pb-5#{else}pb-3#end">
+                <h2 class="#if(${title_align}=='center')text-center#end">${info_component_title}</h2>
+            </div>
+        #end
+    #if(!$_PropertyTool.isEmpty($info_component_copy))
+        <div class="component full-width-paragraph pb-3">${info_component_copy}</div>
+    #end
+
+<div class="row text-center pt-3">
+    #foreach($i in $info_items)
+        #set($info_element = $i.getChild("info_elements"))
+        #set($info_icon = $_EscapeTool.xml($i.getChild("info_icon").textValue))
+        #set($info_data = $_EscapeTool.xml($i.getChild("info_data").textValue))
+        #set($stat_title = $_EscapeTool.xml($i.getChild("stat_title").textValue))
+        #set($info_text = $i.getChild("info_text").textValue)
+        
+    
+        
+    <div class="#if(${column_numbers}==4)col-sm-12 col-md-3#{else}col-sm-12 col-md-4#end px-4"> 
+    <div class="info-wrap">
+         
+      #if($info_element.hasTextValue("number") || $info_element.hasTextValue("visual"))      
+        <div class="info-bg-wrap">
+                     #if($info_element.hasTextValue("number"))
+                       <p class="display-4 info-number text-blue" >${info_data}</p>
+                    #end
+                    #if($info_element.hasTextValue("visual"))
+					    <span class='#if(${info_data}!="")img-transparent#end'>
+					    	<i class="fa-sharp fa-solid fa-${info_icon}"></i>
+					    </span>
+                    #end
+                    
+        </div>
+        #end
+    
+                    #if($info_element.hasTextValue("title"))
+                        <p class="info-title mt-3 fw-bold ">${stat_title}</p>
+                    #end
+
+                    #if($info_element.hasTextValue("text"))
+                        <p class="info-text">${info_text}</p>
+                     #end
+
+</div>
+</div>
+#end
+</div>
+</div>
+#end
+
