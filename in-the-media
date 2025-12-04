@@ -1,0 +1,36 @@
+#macro (displayMedia $section) 
+#set($articles=$section.getChildren("media_article"))
+
+
+
+
+
+
+
+<div class="container py-5">
+            <div class="section-title mt-3">
+             <h2 class="eyebrow-centered">In the media </h2>
+        </div>
+<div class="pb-3 row fs-5 release">
+#if (!$articles.isEmpty())    
+
+#foreach($a in $articles)
+    #set($article_title=$a.getChild("article_title").textValue)
+    #set($article_link=$a.getChild("article_link").textValue)
+    #set($article_date=$a.getChild("article_date").textValue)
+    #set($article_source=$a.getChild("article_source").textValue)
+    #set($article_teaser=$a.getChild("article_teaser").textValue)
+    <div class="col-md-6 py-3 px-3">
+       
+    <strong><a href="${article_link}" target="_blank" class="newsroom-article-title" title="${article_title}">${article_title} <i class="fa-solid fa-arrow-up-right-from-square fs-6"></i></a></strong>
+
+           <p><span class="text-darker-gray">${article_date}</span> &#151; ${article_teaser}<br/>
+           <span class="fw-bold"><i>${article_source}</i></span></p>
+
+    </div>
+
+#end
+#end
+</div> 
+</div>
+#end
