@@ -1,0 +1,49 @@
+## #displayNavCards($currentPage.getStructuredDataNodes("section")[6]) 
+
+#macro (displayNavCards $section) 
+#set($cards=$section.getChild("cards").getChildren("nav_cards"))
+#set($card_title = "")
+#set($card_text ="")
+
+
+<div class="px-6 pb-5 row cards-section mb-3 #if($cards.size()==2) mx-5#end">
+#if (!$cards.isEmpty())    
+    #foreach ($card in $cards) 
+        #set($card_title = $_EscapeTool.xml($card.getChild("card_title").textValue))
+        #set($card_text = $card.getChild("card_text").textValue)
+        #set($blank = $_EscapeTool.xml($card.getChild("blank").textValue))
+        #set($internal_url = $card.getChild("internal_link_group").getChild("internal_link").asset.link)
+        #set($external_url = $card.getChild("external_link_group").getChild("link_url").textValue)
+        
+   
+
+        <div class="#if($cards.size()==4)col-md-3 col-lg-3 #elseif($cards.size()==2) col-md-6 col-lg-6 #{else} col-md-4 col-lg-4 #end col-sm-12 col-xs-12 mb-3">
+            <div class="card card-navigation hover-blue h-100">
+                <div class="py-4 px-5 card-body d-flex flex-column">
+                    #if (!$_PropertyTool.isEmpty($card_title))
+                        <p class="card-title fs-5"><strong>${card_title}</strong></p>
+                    #end
+                    #if (!$_PropertyTool.isEmpty($card_text))
+                        <p>${card_text}</p>
+                    #end
+                    
+                    
+                       #if ($card.getChild("button_toggle").hasTextValue("internal_link"))
+                         <a href='${internal_url}' class='mt-auto stretched-link float-right text-nowrap' target="_parent" aria-label="Click here for more info on ${card_title}" title="Learn More about ${card_title}"></a>
+                        #else
+                             <a href='${external_url}' class='mt-auto stretched-link float-right text-nowrap' target="#if(${blank}=='yes')_blank#{else}_parent#end" aria-label="Click here for more info on ${card_title}" title="Learn More about ${card_title}"></a>
+                        #end
+                 
+                    
+                    
+                 </div>
+             </div>
+        </div>
+
+    #end
+#end
+
+
+</div>
+
+#end
