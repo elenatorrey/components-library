@@ -1,0 +1,111 @@
+#set ($page = $_XPathTool.selectSingleNode($contentRoot, "/system-data-structure"))
+#set($interstitial = $_XPathTool.selectNodes($page, "interstitial"))
+#set($bg_color = $_XPathTool.selectSingleNode($interstitial, "bg_color"))
+#set($bg_color = $_EscapeTool.xml($bg_color.value))
+#set($bg_value = "#if(${bg_color}=='grey')bg-lighter-grey#elseif(${bg_color}=='blue')bg-blue text-white#elseif(${bg_color}=='yellow')bg-yellow#end")
+
+        
+<div class="${bg_value}">
+<div class="py-5 container interstitial component">
+    #set($title = $_XPathTool.selectSingleNode($interstitial, "title"))
+    #set($layout = $_XPathTool.selectSingleNode($interstitial, "layout"))
+    #set($category = $_XPathTool.selectSingleNode($interstitial, "category"))
+    #set($text = $_XPathTool.selectSingleNode($interstitial, "text"))
+    #set($interstitial_btn = $_XPathTool.selectNodes($interstitial,"interstitial_btn"))
+    #set($category_bg = "#if(${bg_color}=='blue')bg-white text-black#{else}bg-black text-white#end")
+    #set($link_bg = "#if(${bg_color}=='blue')btn-white#{else}btn-black#end")
+    #set ($ext_item_icon = $_XPathTool.selectSingleNode($interstitial,"menu_item_link/ext_icon"))
+    #set ($ext_item_icon_value = $_EscapeTool.xml($ext_item_icon.value))
+    #set($blank = $_EscapeTool.xml($interstitial.getChild("blank").value))
+
+
+        
+#if($_EscapeTool.xml($layout.value)=="stacked")
+<div class="text-center stacked-interstitial">
+     #if(!$_EscapeTool.xml($category.value).isEmpty())
+        <p><span  class="mb-5 px-2 category-title ${category_bg}">$_EscapeTool.xml($category.value)</span></p>
+    #end
+    #if(!$_EscapeTool.xml($title.value).isEmpty())
+        <h2 class="mb-4">$_EscapeTool.xml($title.value)</h2>
+    #end
+       
+    #if($text.size() >0 || $text.value!="")
+        <p>$_SerializerTool.serialize($text, true)</p>
+    #end
+        
+        #if($interstitial_btn.size()>0)
+        #foreach($i in $interstitial_btn)
+             #set($button_toggle = $_XPathTool.selectSingleNode($i,"button_toggle"))
+            #set($button_toggle = $_EscapeTool.xml($button_toggle.getChild("value").value))
+            #set($internal_url = $_XPathTool.selectSingleNode($i,"internal_link_group/internal_link/path"))
+            #set($internal_link_text = $_XPathTool.selectSingleNode($i,"internal_link_group/link_text"))
+            #set($external_url = $_XPathTool.selectSingleNode($i,"external_link_group/link_url"))
+            #set($external_link_text = $_XPathTool.selectSingleNode($i,"external_link_group/link_text"))
+            #set ($ext_item_icon = $_XPathTool.selectSingleNode($i,"ext_icon"))
+            #set ($ext_item_icon_value = $_EscapeTool.xml($ext_item_icon.value))
+            
+            #if(!$_EscapeTool.xml($button_toggle.value).isEmpty())
+                 #if(${button_toggle}=="internal_link")
+                    #if (!$internal_url.isEmpty())
+                        <p class="mt-auto pt-3"><a href='$_EscapeTool.xml($internal_url.value)' class="${link_bg}" target="_parent" title='$_EscapeTool.xml($title.value)'>$_EscapeTool.xml($internal_link_text.value) </a></p>
+                     #end
+                #else
+                    #if (!$external_url.isEmpty())
+                        <p class="mt-auto pt-3"><a href='$_EscapeTool.xml($external_url.value)' target="#if(${blank}=='yes')_blank#{else}_parent#end" class="#if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end" title='$_EscapeTool.xml($title.value)'>$_EscapeTool.xml($external_link_text.value)  </a></p>
+                     #end 
+                #end
+            #end
+        #end
+        #end
+    </div>
+    
+#else 
+     <div class="row inline-interstitial">
+     <div class="col-md-3 my-auto">
+         
+         #if(!$_EscapeTool.xml($category.value).isEmpty())
+        <p><span  class="mb-5 px-2 category-title ${category_bg}" style="#if(${bg_color}=='blue')box-shadow: -5px 0 0 #000, 5px 0 0 #fff;#{else}box-shadow: -5px 0 0 #000, 5px 0 0 #000;#end ">$_EscapeTool.xml($category.value)</span></p>
+        #end
+        
+        #if(!$_EscapeTool.xml($title.value).isEmpty())
+        <h2 class="mb-2">$_EscapeTool.xml($title.value)</h2>
+        #end
+    </div>
+    
+    <div class="col-md-6 my-auto">
+         #if($text.size() >0 || $text.value!="")
+            <p>$_SerializerTool.serialize($text, true)</p>
+        #end
+    </div>
+    
+    <div class="col-md-3 text-center my-auto">
+             #if($interstitial_btn.size()>0)
+        #foreach($i in $interstitial_btn)
+             #set($button_toggle = $_XPathTool.selectSingleNode($i,"button_toggle"))
+            #set($button_toggle = $_EscapeTool.xml($button_toggle.getChild("value").value))
+            #set($internal_url = $_XPathTool.selectSingleNode($i,"internal_link_group/internal_link/path"))
+            #set($internal_link_text = $_XPathTool.selectSingleNode($i,"internal_link_group/link_text"))
+            #set($external_url = $_XPathTool.selectSingleNode($i,"external_link_group/link_url"))
+            #set($external_link_text = $_XPathTool.selectSingleNode($i,"external_link_group/link_text"))
+            #set ($ext_item_icon = $_XPathTool.selectSingleNode($i,"ext_icon"))
+            #set ($ext_item_icon_value = $_EscapeTool.xml($ext_item_icon.value))
+            
+            #if(!$_EscapeTool.xml($button_toggle.value).isEmpty())
+                 #if(${button_toggle}=="internal_link")
+                    #if (!$internal_url.isEmpty())
+                        <p><a href='$_EscapeTool.xml($internal_url.value)' class="${link_bg}" target="_parent" title='$_EscapeTool.xml($title.value)'>$_EscapeTool.xml($internal_link_text.value)</a></p>
+                     #end
+                #else
+                    #if (!$external_url.isEmpty())
+                        <p><a href='$_EscapeTool.xml($external_url.value)' class="#if(${ext_item_icon_value}=="yes")${link_bg}-ext#{else}${link_bg}#end" target="#if(${blank}=='yes')_blank#{else}_parent#end" title='$_EscapeTool.xml($title.value)'>$_EscapeTool.xml($external_link_text.value) </a></p>
+                     #end 
+                #end
+            #end
+        #end
+        #end
+    </div>
+    </div>
+#end
+</div>
+</div>
+
