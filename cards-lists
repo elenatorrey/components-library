@@ -1,0 +1,58 @@
+## #displayListCards($currentPage.getStructuredDataNodes("section")[3]) 
+
+#macro (displayListCards $section) 
+#set($cards=$section.getChild("cards").getChildren("lists_group"))
+#set($list_columns="")
+#set($button_toggle="")
+
+
+
+
+<div class="px-6 pb-3 row cards-section card-list-component">
+#if (!$cards.isEmpty())    
+    #foreach ($card in $cards) 
+        #set($list_title = $_EscapeTool.xml($card.getChild("list_title").textValue))
+        #set($card_items = $card.getChildren("card_item"))
+        #set($blank = $_EscapeTool.xml($card.getChild("blank").textValue))
+        #set($list_columns=$card.getChild("list_group_columns").textValue)
+        #set($card_title = "")
+       
+
+        <div class="#if(${list_columns}=="list_group_3")col-md-6 col-lg-4 col-sm-12 col-xs-12#{else}col-md-6 col-lg-6 col-sm-12 col-xs-12#end mb-5">
+            #if (!$_PropertyTool.isEmpty($list_title))
+                <p class="display-6 px-3">${list_title}</p>
+            #end
+               
+            #foreach ($i in $card_items) 
+                #set($card_title = $_EscapeTool.xml($i.getChild("card_title").textValue))
+                #set($blank = $i.getChild("external_link_group").getChild("blank").textValue)
+               #set($internal_url = $i.getChild("internal_link_group").getChild("internal_link").asset.link)
+                #set($external_url = $i.getChild("external_link_group").getChild("link_url").textValue)
+                #set ($ext_item_icon = $i.getChild("external_link_group").getChild("ext_icon"))
+                #set ($ext_item_icon_value = $ext_item_icon.textValue)
+                #set($button_toggle = $i.getChild("button_toggle"))
+
+            <div class="card card-list hover-blue #if($velocityCount==1)card-list-1#end">
+                <div class="py-2 px-3 card-body d-flex flex-column">
+                   #if ($button_toggle.hasTextValue("internal_link"))
+                         <span class="card-list-title card-title mb-1"><a href='${internal_url}' target="_parent" class='mt-auto stretched-link float-right text-decoration-none' aria-label="${card_title}" title='${card_title}'>${card_title}</a></span>
+                    #end
+                    #if ($button_toggle.hasTextValue("external_link"))
+                             <span class="card-title mb-1 #if(${ext_item_icon_value}=="yes")card-list-title-ext#{else}card-list-title#end"><a href='${external_url}' aria-label="${card_title}" target="#if(${blank}=='yes')_blank#{else}_parent#end" class='mt-auto stretched-link float-right text-decoration-none' title='${card_title}'>${card_title}</a></span>
+                    #end
+                    
+                    
+                 </div>
+             </div>
+             #end
+            
+        </div>
+
+    #end
+#end
+
+
+</div>
+
+
+#end
