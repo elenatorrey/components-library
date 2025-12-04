@@ -1,0 +1,90 @@
+##  #displayMediaFeature($currentPage.getStructuredDataNodes("section")[2])  ##for testing remove when done
+
+#macro (displayMediaFeature $section) 
+
+#set($media_feature = $section.getChild("media_feature"))
+#set($bg_color = $media_feature.getChild("bg_color").textValue)
+#set($bg_value = "#if(${bg_color}=='grey')bg-lighter-grey#elseif(${bg_color}=='blue')bg-blue text-white#elseif(${bg_color}=='yellow')bg-yellow#end")
+
+<div class=" py-5 media-feature-component component">
+    #set($title="")
+    #set($title = $media_feature.getChild("title").textValue)
+    #set($layout = $media_feature.getChild("layout").textValue)
+    #set($media = $media_feature.getChild("media_type").textValue)
+    #set($imgix = $media_feature.getChild("imgix_link").textValue)
+    #set($alt = $media_feature.getChild("alt").textValue)
+    #set($iframe = $media_feature.getChild("iframe").textValue)
+    #set($video_file = $media_feature.getChild("video_file").textValue)
+    #set($video_alt = $media_feature.getChild("video_alt").textValue)
+    #set($category = $media_feature.getChild("category").textValue)
+    #set($media_text = $media_feature.getChild("content_field").textValue)
+    #set($button_toggle = $media_feature.getChild("button_toggle"))
+    #set($internal_url = $media_feature.getChild("internal_link_group").getChild("internal_link").asset.link)
+    #set($internal_link_text = $media_feature.getChild("internal_link_group").getChild("link_text").textValue)
+    #set($external_url = $media_feature.getChild("external_link_group").getChild("link_url").textValue)
+    #set($external_link_text = $media_feature.getChild("external_link_group").getChild("link_text").textValue)
+    #set ($ext_item_icon_value = $media_feature.getChild("ext_icon").textValue)
+    #set($blank = $media_feature.getChild("blank").textValue)
+    #set($link_bg = "#if(${bg_color}=='blue')link-hover-white white-link#{else}link-hover-black black-link#end")
+
+ <div class="media-feature-wrap ">       
+         <div class="media-feature-wrap-left">
+      #if(${media}=="iframe")
+             #if(!$_PropertyTool.isEmpty($iframe))
+            <!--#protect
+            <span class="w-100">${iframe}</span>
+            #protect-->
+            #end
+         #else
+    <div class="video-wrap" id="mediaFeature">
+            <div class="play-pause-container h-100" id="hero-pause-play-toggle2"><i class="bi bi-pause-fill align-middle" id="pause-icon2"></i> <span id="play-pause-text2">Pause</span></div>
+            <div class="cc-container h-100 pe-3" id="hero-cc-toggle2"><i class="fa-solid fa-closed-captioning" id="cc-btn2"></i> <span id="cc-text2">Captions On</span></div>
+
+         <video autoplay="autoplay" class="ratio ratio-16x9" preload="auto" loop="loop" id="mediaFeatureVid" muted="" playsinline="" alt="${video_alt}">
+            	<source src="${video_file}.webm" type="video/webm"/>
+    			<source src="${video_file}.mp4" type="video/mp4"/>
+    			<track id="heroTrack" kind="subtitles" label="English" src="../${video_file}.vtt" srclang="en" />
+    			<img alt="home video" src="https://son-images.imgix.net/home/exterior-ve.jpg?q=30&amp;w=1515" title="Sorry, your browser doesn't support the &lt;video&gt; tag"/>
+
+    		</video>
+        </div>
+
+        #end
+        </div>
+    
+    <div class="media-feature-text-wrap-right ${bg_value}">
+        
+             #if(!$_PropertyTool.isEmpty($title))
+        <h2 class="mb-4 utopia-font">${title}</h2>
+        #end
+        
+        
+        #if(!$_PropertyTool.isEmpty($media_text))
+            <div class="lead">${media_text}</div>
+        #end
+    
+        
+          #if($button_toggle.hasTextValue("internal_link"))
+             <p class="mt-auto pt-3">
+                #if(!$_PropertyTool.isEmpty($internal_url))
+                    <a href='$_EscapeTool.xml(${internal_url})' class="${link_bg} my-1" target="_parent" title='$_EscapeTool.xml(${title})'>${internal_link_text}</a><br/>
+                #end
+                </p>
+            #end
+            
+            #if($button_toggle.hasTextValue("external_link"))
+            <p class="mt-auto pt-3">
+                #if(!$_PropertyTool.isEmpty($external_url))
+                    <a href='$_EscapeTool.xml(${external_url})' target="#if(${blank}=='yes')_blank#{else}_parent#end" class="#if(${ext_item_icon_value}=='yes')${link_bg}-ext#{else}${link_bg}#end my-1" title='${title}'>${external_link_text}</a>
+                #end
+            </p>
+            #end
+        
+    </div>
+    </div>
+
+</div>
+
+#end
+
+
